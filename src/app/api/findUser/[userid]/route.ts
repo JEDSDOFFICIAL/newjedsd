@@ -2,15 +2,13 @@ import { NextResponse } from "next/server";
 import dbConnect from "@/lib/dbConnect";
 import { UserModel } from "@/model/User";
 import { Types } from "mongoose";
-export async function GET(request: Request) {
+export async function GET(request: Request, context: { params: { userid: string } }) {
   await dbConnect();
 
   try {
-    console.log('Request URL:', request.url); // Log the full URL
-const { searchParams } = new URL(request.url);
-const userid = searchParams.get('userid');
-console.log('Userid:', userid); // Log the username
+    const { userid } = context.params; 
 
+console.log("User ID:", userid); // Log the user ID 
 
     if (!userid) {
       return NextResponse.json(

@@ -23,7 +23,7 @@ export function TeamSwitcher() {
           
           const userid = session.user._id // Use the user ID from session
        
-          const response = await axios.get(`/api/findUser?userid=${userid}`)
+          const response = await axios.get(`/api/findUser/${userid}`)
 
          console.log('Response:', response.data); // Log the response data
 
