@@ -93,8 +93,12 @@ function Navbar() {
             <div className="flex items-center gap-4">
             {session ? (
           <>
-           
-            <Button onClick={() => signOut()} className="w-full md:w-auto bg-slate-100 text-black" variant='outline'>
+           <Link href={`/user/${session?.user?._id}`}>
+           <Button  className="w-full md:w-auto bg-slate-100 text-black" variant='outline'>
+              Your profile
+            </Button>
+           </Link>
+            <Button onClick={() => signOut()} className="w-full md:w-auto bg-slate-100 text-black" variant='default'>
               Logout
             </Button>
           </>

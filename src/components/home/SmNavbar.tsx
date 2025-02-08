@@ -42,6 +42,8 @@ function SmNavbar() {
     setIsAboutClicked(false);
   };
    const { data: session } = useSession();
+   console.log(session?.user);
+   
   return (
     <div className="w-full h-fit flex bg-white backdrop-filter backdrop-blur-sm bg-opacity-50  text-black items-center justify-between p-3">
       <div className="flex h-full w-auto gap-6 items-center">
@@ -89,13 +91,25 @@ function SmNavbar() {
                   <SearchIcon /> Search an Article
                 </Button>
                 {
-                  session ? <Button
+                  session ?
+                  <>
+                  <Link href={`/user/${session?.user?.id}`}>
+                  <Button
+                  variant={"default"}
+                  size={"lg"}
+                  className="w-full shadow-xl text-xl mt-11"
+                >
+                  Your profile
+                </Button>
+                  
+                  </Link>
+                  <Button
                   variant={"destructive"}
                   size={"lg"}
                   className="w-full shadow-xl text-xl mt-11"
                 >
                   Sign Out
-                </Button> :  <Button
+                </Button> </>:  <Button
                   variant={"destructive"}
                   size={"lg"}
                   className="w-[95vw] shadow-xl text-xl mt-11"
