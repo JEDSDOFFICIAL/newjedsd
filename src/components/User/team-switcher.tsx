@@ -1,57 +1,17 @@
 "use client"
 
-import { useEffect, useState } from "react"
+
 import { ChevronsUpDown } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "@/components/ui/sidebar"
-import { useSession } from "next-auth/react"
-import axios from "axios"
-import { User } from "@/model/User"
-import { Button } from "../ui/button"
 
-export function TeamSwitcher() {
+import { Button } from "../ui/button"
+import { useSession } from "next-auth/react"
+import { User } from "@/model/User"
+
+export function TeamSwitcher({user}:{user?:User|null}) {
   const { isMobile } = useSidebar()
   const { data: session } = useSession()
-  const [user, setUser] = useState<User | null>(null)
-  const [loading, setLoading] = useState<boolean>(true)
-  const [error, setError] = useState<string | null>(null)
-
-  useEffect(() => {
-    if (session?.user?._id) {
-      const fetchUserData = async () => {
-        try {
-          
-          const userid = session.user._id // Use the user ID from session
-       
-          const response = await axios.get(`/api/findUser/${userid}`)
-
-         console.log('Response:', response.data); // Log the response data
-
-          if (response.data.success) {
-            setUser(response.data.user)
-          } else {
-            setError(response.data.message)
-          }
-        } catch (err) {
-          setError("Error fetching user data")
-          console.error("Error fetching user data:", err)
-        } finally {
-          setLoading(false)
-        }
-      }
-
-      fetchUserData()
-    }
-  }, [session]) // Dependency on session, it will trigger when session changes
-
-  if (loading) {
-    return <p>Loading...</p>
-  }
-
-  if (error) {
-    return <p>Error: {error}</p>
-  }
-
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -69,7 +29,7 @@ export function TeamSwitcher() {
                   {session ? session.user.username : <div className="border-gray-500 border-y-4 rounded-full w-6 h-6 animate-spin duration-1000" />}
                 </span>
                 <span className="truncate text-xs">
-                  {session ?user?.usertype : "loading..."}
+                  {user?.usertype ||'Loading...'}
                 </span>
               </div>
               <ChevronsUpDown className="ml-auto" />

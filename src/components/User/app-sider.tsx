@@ -2,15 +2,10 @@
 
 import * as React from "react"
 import {
-  AudioWaveform,
+ 
   BookOpen,
-  Bot,
-  Command,
-  Frame,
-  GalleryVerticalEnd,
-  Map,
-  PieChart,
-  Settings2,
+ LayoutDashboard,
+ UploadIcon
 
 } from "lucide-react"
 
@@ -25,68 +20,47 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar"
+import { User } from "@/model/User"
 
 // This is sample data.
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
-  teams: [
-    {
-      name: "Acme Inc",
-      logo: GalleryVerticalEnd,
-      plan: "Enterprise",
-    },
-    {
-      name: "Acme Corp.",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
-    },
-  ],
   navMain: [
     {
-      title: "Playground",
+      title: "User Dashboard",
       url: "#",
-      icon: Command,
+      icon: LayoutDashboard,
       isActive: true,
       items: [
         {
-          title: "History",
+          title: "Profile",
           url: "#",
         },
         {
-          title: "Starred",
-          url: "#",
+          title: "Home",
+          url: "/",
         },
-        {
-          title: "Settings",
-          url: "#",
-        },
+        // {
+        //   title: "Settings",
+        //   url: "#",
+        // },
       ],
     },
     {
-      title: "Models",
+      title: "Upload",
       url: "#",
-      icon: Bot,
+      icon: UploadIcon,
       items: [
         {
-          title: "Genesis",
-          url: "#",
+          title: "Upload Paper",
+          url: "/upload",
         },
         {
-          title: "Explorer",
-          url: "#",
+          title: "Track Paper",
+          url: "/Track",
         },
         {
-          title: "Quantum",
-          url: "#",
+          title: "Read uploaded papers",
+          url: "/search",
         },
       ],
     },
@@ -96,77 +70,38 @@ const data = {
       icon: BookOpen,
       items: [
         {
-          title: "Introduction",
+          title: "Reviewer Guidelines",
           url: "#",
         },
         {
-          title: "Get Started",
+          title: "Author Guidelines",
           url: "#",
         },
         {
-          title: "Tutorials",
+          title: "Editorial Guidelines",
           url: "#",
         },
         {
-          title: "Changelog",
+          title: "Policies",
           url: "#",
         },
       ],
     },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
-      ],
-    },
-  ],
-  projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
-    },
+  
   ],
 }
 
-export default function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export default function AppSidebar({user}:{user?:User|null}) {
   return (
-    <Sidebar collapsible="icon" {...props}>
+    <Sidebar collapsible="icon" >
       <SidebarHeader>
-        <TeamSwitcher  />
+        <TeamSwitcher  user={user}/>
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={user} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

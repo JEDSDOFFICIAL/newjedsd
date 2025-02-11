@@ -53,7 +53,9 @@ function SmNavbar() {
       </div>
       <div className="flex h-full w-auto gap-6 items-center">
         <SearchIcon onClick={()=>{alert("We are currently working on it ... plz check after some time")}}/>
-        <User onClick={()=>{alert("We are currently working on it ... plz check after some time")}}/>
+        <Link href={session?`/user/${session?.user?.username}`:'/sign-in'}>
+        <User />
+        </Link>
       </div>
       {isClicked && (
         <div className="fixed top-0 left-0 w-full h-screen flex z-[111]">
@@ -93,7 +95,7 @@ function SmNavbar() {
                 {
                   session ?
                   <>
-                  <Link href={`/user/${session?.user?.id}`}>
+                  <Link href={`/user/${session?.user?.username}`}>
                   <Button
                   variant={"default"}
                   size={"lg"}
@@ -163,11 +165,9 @@ const AboutNavbar = () => {
             </p>
             <div className="flex flex-col gap-2 text-lg">
               <p className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
-                Our Mission
+                Our Mission and Vission
               </p>
-              <p className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
-                Our Vision
-              </p>
+             
               <p className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
                 Our Team
               </p>
@@ -182,12 +182,7 @@ const AboutNavbar = () => {
                 Call for Papers
               </p>
              
-              <p className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
-                Recognitions
-              </p>
-              <p className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
-                New Members
-              </p>
+            
             </div>
           </div>
           <div className="flex flex-col gap-4 text-base">
@@ -219,16 +214,11 @@ const AboutNavbar = () => {
               <p className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
                 Templates
               </p>
-              <p className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
-                Open access
-              </p>
-              
+             
               <p className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
                 Peer review
               </p>
-              <p className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
-                Research Topics
-              </p>
+            
             </div>
           </div>
 
@@ -241,9 +231,7 @@ const AboutNavbar = () => {
               <p className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
                 Contact Us
               </p>
-              <p className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
-                Mail Us
-              </p>
+             
             </div>
           </div>
         </div>

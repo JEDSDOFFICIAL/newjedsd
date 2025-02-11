@@ -17,7 +17,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
-import { signOut, useSession } from "next-auth/react";
+import {  useSession } from "next-auth/react";
 
 import { Button } from "../ui/button";
 
@@ -93,14 +93,12 @@ function Navbar() {
             <div className="flex items-center gap-4">
             {session ? (
           <>
-           <Link href={`/user/${session?.user?._id}`}>
+           <Link href={`/user/${session?.user?.username}`}>
            <Button  className="w-full md:w-auto bg-slate-100 text-black" variant='outline'>
               Your profile
             </Button>
            </Link>
-            <Button onClick={() => signOut()} className="w-full md:w-auto bg-slate-100 text-black" variant='default'>
-              Logout
-            </Button>
+          
           </>
         ) : (
           <Link href="/sign-in">
@@ -117,17 +115,13 @@ function Navbar() {
 
           <div className="flex flex-col gap-4 text-base">
             <p className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
-              Our Mission
+              Our Mission and vission
             </p>
-            <p className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
-              Our Vision
-            </p>
+            
             <p className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
               Our Team
             </p>
-            <p className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
-            News and Announcement
-            </p>
+            
            
           </div>
         </div>
@@ -145,9 +139,7 @@ function Navbar() {
             <p className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
               Reviewer Guidelines
             </p>
-            <p className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
-              Recognitions
-            </p>
+            
            
           </div>
         </div>
@@ -164,10 +156,7 @@ function Navbar() {
             <p className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
               Templates
             </p>
-            <p className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
-              Open access
-            </p>
-            
+           
             <p className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
               Peer review
             </p>
@@ -186,9 +175,7 @@ function Navbar() {
             <p className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
               Contact Us
             </p>
-            <p className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
-              mail Us
-            </p>
+           
           </div>
         </div>
         <div className="absolute bottom-2 right-3 flex gap-6 justify-center items-center h-fit w-fit">
