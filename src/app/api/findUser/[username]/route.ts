@@ -1,14 +1,14 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "@/lib/dbConnect";
 import { UserModel } from "@/model/User";
-import { Types } from "mongoose";
-export async function GET(request: Request, context: { params: { username: string } }) {
+
+export async function GET(req: NextRequest, { params }: { params: { username: string } }) {
   await dbConnect();
 
   try {
-    const { username } = context.params; 
+    const { username } = params;
 
-console.log("User ID:", username); // Log the user ID 
+    console.log("User ID:", username); // Log the user ID
 
     if (!username) {
       return NextResponse.json(

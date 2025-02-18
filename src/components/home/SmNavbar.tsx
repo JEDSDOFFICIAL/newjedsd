@@ -111,13 +111,13 @@ function SmNavbar() {
                   className="w-full shadow-xl text-xl mt-11"
                 >
                   Sign Out
-                </Button> </>:  <Button
+                </Button> </>: <Link href={"/sign-up"}> <Button
                   variant={"destructive"}
                   size={"lg"}
                   className="w-[95vw] shadow-xl text-xl mt-11"
                 >
                   Sign In
-                </Button> 
+                </Button> </Link>
                 }
                </div>
               </ul>
@@ -160,13 +160,13 @@ const AboutNavbar = () => {
       <div className="flex md:flex-row flex-col justify-around items-start pl-7 gap-6 text-2xl text-white mt-7">
         <div className="flex flex-col gap-7 text-base">
           <div className="flex flex-col gap-4 text-base">
-            <p className=" text-gray-200 hover:text-white text-2xl underline transition-all delay-100 cursor-pointer">
-              Who are we
-            </p>
+            <Link href={"/aboutus"} className=" text-gray-200 hover:text-white text-2xl underline transition-all delay-100 cursor-pointer">
+              About Us
+            </Link>
             <div className="flex flex-col gap-2 text-lg">
-              <p className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
+              <Link href={"/mission"} className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
                 Our Mission and Vission
-              </p>
+              </Link>
              
               <p className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
                 Our Team

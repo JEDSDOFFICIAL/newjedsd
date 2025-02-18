@@ -1,5 +1,7 @@
+import { sendSuccessfulAuthEmail } from '@/helpers/sendSuccessfulAuthEmail';
 import dbConnect from '@/lib/dbConnect';
 import {UserModel} from '@/model/User';
+import { date } from 'zod';
 
 export async function POST(request: Request) {
   // Connect to the database
@@ -24,8 +26,10 @@ export async function POST(request: Request) {
     if (isCodeValid && isCodeNotExpired) {
       // Update the user's verification status
       user.isVerified = true;
+      user.verifyCode = '';
+      user.verifyCodeExpiry = new Date();
       await user.save();
-
+      await sendSuccessfulAuthEmail(user.email, user.username);
       return Response.json(
         { success: true, message: 'Account verified successfully' },
         { status: 200 }

@@ -111,16 +111,16 @@ function Navbar() {
       </div>
       <DropdownMenuContent className="w-[100vw] h-[50vh] bg-white text-black flex flex-row items-start py-7  justify-around">
         <div className="flex flex-col justify-start items-start">
-          <h1 className="text-xl underline font-bold py-4">Who are we</h1>
+          <Link href={"/aboutus"} className="text-xl underline font-bold py-4">About us</Link>
 
           <div className="flex flex-col gap-4 text-base">
-            <p className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
+            <Link href={"/mission"} className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
               Our Mission and vission
-            </p>
+            </Link>
             
-            <p className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
+            <Link href={"/team"} className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
               Our Team
-            </p>
+            </Link>
             
            
           </div>

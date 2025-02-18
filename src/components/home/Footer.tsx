@@ -12,7 +12,7 @@ function Footer() {
             href="#"
             aria-label="Brand"
           >
-            <Image src={'/logojedsd.jpg'} alt="logo" width={100} height={100}/>
+            <Image src={'/logored.jpg'} alt="logo" width={100} height={100}/>
           </a>
           <p className="mt-3 text-xs sm:text-sm text-gray-600">
             © 2025 JEDSD .

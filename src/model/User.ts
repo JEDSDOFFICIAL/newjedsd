@@ -3,6 +3,7 @@ import mongoose, { Schema, Document, Model } from 'mongoose';
 export interface Author {
   name: string;
   emailId: string;
+  affiliation:string;
   contactNumber: string;
 }
 
@@ -11,10 +12,10 @@ export interface Paper extends Document {
   abstract: string;
   authors: Author[];
   keywords: string[];
-  publishDate: Date;
   status: 'published' | 'uploaded' | 'onreview';
   pointofContact: Author;
   paperurl: string;
+  createdAt?: Date;
 }
 
 export interface Address extends Document {
@@ -32,7 +33,7 @@ export interface User extends Document {
   verifyCodeExpiry: Date;
   isVerified: boolean;
   usertype: 'Author' | 'Reviewer' | 'Admin';
-  paper?: Paper[];
+  paper?: String[];
   contactNumber?: string;
   address?: Address;
 }
@@ -41,6 +42,7 @@ export interface User extends Document {
 const AuthorSchema: Schema<Author> = new Schema({
   name: { type: String, required: true },
   emailId: { type: String, required: true },
+  affiliation: { type: String, required: true },
   contactNumber: { type: String, required: true },
 });
 
@@ -49,7 +51,6 @@ const PaperSchema: Schema<Paper> = new Schema({
   abstract: { type: String, required: true },
   authors: { type: [AuthorSchema], required: true },
   keywords: { type: [String], required: true },
-  publishDate: { type: Date, required: true },
   status: {
     type: String,
     enum: ['published', 'uploaded', 'onreview'],
@@ -57,6 +58,7 @@ const PaperSchema: Schema<Paper> = new Schema({
   },
   pointofContact: { type: AuthorSchema, required: true },
   paperurl: { type: String, required: true },
+  createdAt: { type: Date, default: Date.now },
 });
 
 const AddressSchema: Schema<Address> = new Schema({
@@ -100,7 +102,7 @@ const UserSchema: Schema<User> = new Schema({
     enum: ['Admin', 'Reviewer', 'Author'],
     default: 'Author',
   },
-  paper: { type: [PaperSchema] },
+  paper: { type: [String] },
   contactNumber: { type: String },
   address: { type: AddressSchema },
 });
