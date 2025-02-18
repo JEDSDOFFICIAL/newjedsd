@@ -1,5 +1,5 @@
 import dbConnect from "@/lib/dbConnect";
-import Paper from "@/models/Paper"; // Ensure this model exists
+import {PaperModel} from "@/model/User"; // Ensure this model exists
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request, context: { params: { username: string } }) {
@@ -19,7 +19,7 @@ export async function POST(request: Request, context: { params: { username: stri
         }
 
         // Find the paper by ID
-        const paper = await Paper.findById(paperId);
+        const paper = await PaperModel.findById(paperId);
 
         if (!paper) {
             return NextResponse.json(
@@ -29,7 +29,7 @@ export async function POST(request: Request, context: { params: { username: stri
         }
 
         // Update the paper
-        const updatedPaper = await Paper.findByIdAndUpdate(
+        const updatedPaper = await PaperModel.findByIdAndUpdate(
             paperId,
             { $set: updateData },
             { new: true, runValidators: true }
