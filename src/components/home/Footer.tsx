@@ -1,5 +1,6 @@
 import { MailIcon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 function Footer() {
@@ -20,36 +21,28 @@ function Footer() {
         </div>
 
         <div>
-          <h4 className="text-xs font-semibold text-gray-900 uppercase">
+          <Link href={"/aboutus"} className="text-xs font-semibold text-gray-900 uppercase">
             About  Us
-          </h4>
+          </Link>
 
           <div className="mt-3 grid space-y-3 text-sm">
             <p>
-              <a
+              <Link
                 className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
-                href="#"
+                href={"/team"}
               >
                 Our Team
-              </a>
+              </Link>
             </p>
             <p>
-              <a
+              <Link
                 className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
-                href="#"
+                href={"/mission"}
               >
-                Our vision
-              </a>
+                Our mission and vision
+              </Link>
             </p>
-            <p>
-              <a
-                className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
-                href="#"
-              >
-                Our Mission
-              </a>
-            </p>
-            
+           
           </div>
         </div>
 
@@ -59,15 +52,7 @@ function Footer() {
           </h4>
 
           <div className="mt-3 grid space-y-3 text-sm">
-            <p>
-              <a
-                className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
-                href="#"
-              >
-                About us
-              </a>
-            </p>
-           
+          
             <p>
               <a
                 className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
@@ -103,15 +88,7 @@ function Footer() {
                 Community
               </a>
             </p>
-            <p>
-              <a
-                className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
-                href="#"
-              >
-                Help & Support
-              </a>
-            </p>
-            
+           
           </div>
         </div>
 

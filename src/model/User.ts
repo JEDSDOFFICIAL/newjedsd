@@ -15,6 +15,7 @@ export interface Paper extends Document {
   status: 'published' | 'uploaded' | 'onreview';
   pointofContact: Author;
   paperurl: string;
+  coverletterUrl?: string;
   createdAt?: Date;
 }
 
@@ -58,6 +59,7 @@ const PaperSchema: Schema<Paper> = new Schema({
   },
   pointofContact: { type: AuthorSchema, required: true },
   paperurl: { type: String, required: true },
+  coverletterUrl: { type: String },
   createdAt: { type: Date, default: Date.now },
 });
 
@@ -86,7 +88,7 @@ const UserSchema: Schema<User> = new Schema({
     type: String
   },
   verifyCode: {
-    type: String,
+    type: String ,
     required: [true, 'Verify Code is required'],
   },
   verifyCodeExpiry: {

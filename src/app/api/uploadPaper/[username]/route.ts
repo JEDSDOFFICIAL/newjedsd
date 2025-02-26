@@ -30,7 +30,7 @@ export async function POST(request: Request, context: { params: { username: stri
       );
     }
 
-    const { paperName, abstract, authors, keywords, pointofContact, fileUrl } = body;
+    const { paperName, abstract, authors, keywords, pointofContact, fileUrl,coverletterUrl } = body;
 
     if (!paperName || !abstract || !authors?.length || !pointofContact || !fileUrl ) {
       return NextResponse.json(
@@ -46,6 +46,7 @@ const newkeywords = keywords.split(",").map((keyword: string) => keyword.trim())
       authors,
       pointofContact,
       paperurl: fileUrl,
+      coverletterUrl: coverletterUrl||'',
       status: "uploaded",
       createdAt: new Date(),
     };

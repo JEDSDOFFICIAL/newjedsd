@@ -144,15 +144,15 @@ function Navbar() {
           </div>
         </div>
         <div className="flex flex-col justify-start items-start">
-          <h1 className="text-xl underline font-bold py-4">Publishing Model</h1>
+          <Link href={"/publishingmodel"} className="text-xl underline font-bold py-4">Publishing Model</Link>
 
           <div className="flex flex-col gap-4 text-base">
-          <p className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
+          <Link href={"/callforpapers"} className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
               Call for Papers
-            </p>
-            <p className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
+            </Link>
+            <Link href={"/howwepublish"} className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
               How we publish
-            </p>
+            </Link>
             <p className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
               Templates
             </p>

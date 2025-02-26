@@ -37,7 +37,8 @@ const formSchema = z.object({
     contactNumber: z.string().regex(/^\d{10}$/, "Invalid contact number"),
     affiliation: z.string().optional(), // Affiliation is optional
   }),
-  fileUrl: z.string().url().optional(),
+  fileUrl: z.string().url(),
+  coverletterUrl:z.string().url(),
 });
 
 export default function MultiPageForm() {
@@ -64,6 +65,7 @@ export default function MultiPageForm() {
         affiliation: "",
       }, // Removed affiliation from default point of contact
       fileUrl: "",
+      coverletterUrl:""
     },
   });
 
@@ -76,18 +78,19 @@ export default function MultiPageForm() {
     control,
   });
 
-  const handleFileUpload = async (file: File) => {
+  const handleMenuscriptFileUpload = async (file: File) => {
     if (!file) return;
 
     setLoading(true);
 
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", "upload_files_jedsd"); // Replace with your preset
+    formData.append("upload_preset", "uploads_file_jedsd"); // Replace with your preset
+    formData.append("resource_type", "raw");
 
     try {
       const res = await axios.post(
-        "https://api.cloudinary.com/v1_1/dvnys2mq6/upload", // Replace with your cloud name
+        "https://api.cloudinary.com/v1_1/dvnys2mq6/raw/upload", // Replace with your cloud name
         formData
       );
       setValue("fileUrl", res.data.secure_url);
@@ -95,6 +98,44 @@ export default function MultiPageForm() {
         title: "Upload Success",
         description: "File uploaded successfully!",
       });
+      console.log("res",res);
+      
+    } catch (error) {
+      console.error("Upload failed", error);
+      toast({
+        title: "Upload Failed",
+        description: "Error uploading file.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+  const handleCoverletterFileUpload = async (file: File) => {
+    if (!file) return;
+    if (file && file.size > 10 * 1024 * 1024) { // 10MB limit
+      alert("File size exceeds 10MB limit. Please upload a smaller file.");
+      return;
+    }
+    setLoading(true);
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "uploads_file_jedsd"); // Replace with your preset
+    formData.append("resource_type", "raw");
+
+    try {
+      const res = await axios.post(
+        "https://api.cloudinary.com/v1_1/dvnys2mq6/raw/upload", // Replace with your cloud name
+        formData
+      );
+      setValue("coverletterUrl", res.data.secure_url);
+      toast({
+        title: "Upload Success",
+        description: "File uploaded successfully!",
+      });
+      console.log("res",res);
+      
     } catch (error) {
       console.error("Upload failed", error);
       toast({
@@ -108,6 +149,12 @@ export default function MultiPageForm() {
   };
 
   const onSubmit = async (data: any) => {
+    if (errors){
+      toast({
+        title:"filled error",
+        description:"Every field is not properly filled"
+      })
+    }
     if (!session?.user?.username) {
       toast({
         title: "Authentication Error",
@@ -148,7 +195,7 @@ export default function MultiPageForm() {
             <input
               type="text"
               {...register("paperName")}
-              placeholder="Paper Name"
+              placeholder="Menuscript Title"
               className="w-full p-2 border rounded-md mb-2"
             />
             {errors.paperName && (
@@ -351,7 +398,7 @@ export default function MultiPageForm() {
               type="file"
               onChange={(e) => {
                 if (e.target.files && e.target.files[0]) {
-                  handleFileUpload(e.target.files[0]);
+                  handleMenuscriptFileUpload(e.target.files[0]);
                 }
               }}
               className="w-full p-2 border rounded-md mb-2"
@@ -360,15 +407,6 @@ export default function MultiPageForm() {
             {errors.fileUrl && (
               <p className="text-red-500">{errors.fileUrl.message}</p>
             )}
-
-            {/* <div className="mt-4">
-              <label className="flex items-center">
-                <input type="checkbox" {...register("termsAccepted", { required: "You must accept the terms" })} className="mr-2" />
-                I accept the terms and conditions
-              </label>
-              {errors.termsAccepted && <p className="text-red-500">{errors.termsAccepted.message}</p>}
-            </div> */}
-
             <div className="flex justify-between mt-4">
               <button
                 type="button"
@@ -378,8 +416,43 @@ export default function MultiPageForm() {
                 Back
               </button>
               <button
-                type="submit"
+                type="button"
+                onClick={() => setStep(5)}
                 className="px-4 py-2 bg-green-600 text-white rounded"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        )}{" "}
+        {step === 5 && (
+          <div>
+            <h2 className="text-2xl font-semibold mb-4">Upload Cover letter</h2>
+            <input
+              type="file"
+              onChange={(e) => {
+                if (e.target.files && e.target.files[0]) {
+                  handleCoverletterFileUpload(e.target.files[0]);
+                }
+              }}
+              className="w-full p-2 border rounded-md mb-2"
+            />
+            {loading && <p>Uploading...</p>}
+            {errors.fileUrl && (
+              <p className="text-red-500">{errors.fileUrl.message}</p>
+            )}
+            <div className="flex justify-between mt-4">
+              <button
+                type="button"
+                onClick={() => setStep(4)}
+                className="px-4 py-2 bg-gray-600 text-white rounded"
+              >
+                Back
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-green-600 text-white rounded disabled:opacity-50 disabled:bg-gray-400"
+                disabled={Object.keys(errors).length > 0}
               >
                 Submit
               </button>

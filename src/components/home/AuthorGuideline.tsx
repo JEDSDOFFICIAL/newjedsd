@@ -60,15 +60,7 @@ function AuthorGuideline() {
                     >
                       Publication Ethics
                     </Button>
-                    <Button
-                      
-                      className={`
-                        ${isNavButtonClicked === "ConflictofInterest" && "bg-blue-500 text-white hover:bg-blue-600"} text-xs p-0.5 md:text-sm md:p-2 lg:text-base lg:p-3   
-                      `}
-                      onClick={() => ClickedEvent("ConflictofInterest")}
-                    >
-                      Conflict of Interest
-                    </Button>
+                    
       </div>
 
       <div className="textArea w-full">

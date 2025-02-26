@@ -168,9 +168,9 @@ const AboutNavbar = () => {
                 Our Mission and Vission
               </Link>
              
-              <p className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
+              <Link href={"/team"} className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
                 Our Team
-              </p>
+              </Link>
             </div>
           </div>
           <div className="flex flex-col gap-4 text-base">
@@ -178,9 +178,9 @@ const AboutNavbar = () => {
               News and Announcement
             </p>
             <div className="flex flex-col gap-2 text-lg">
-              <p className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
+              <Link href={"/callforpapers"} className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
                 Call for Papers
-              </p>
+              </Link>
              
             
             </div>
@@ -204,13 +204,13 @@ const AboutNavbar = () => {
         </div>
         <div className="flex flex-col gap-7 text-base">
           <div className="flex flex-col gap-4 text-base">
-            <p className=" text-gray-200 hover:text-white text-2xl underline transition-all delay-100 cursor-pointer">
+            <Link href={"publishingmodel"} className=" text-gray-200 hover:text-white text-2xl underline transition-all delay-100 cursor-pointer">
               Publishing Model
-            </p>
+            </Link>
             <div className="flex flex-col gap-2 text-lg">
-              <p className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
+              <Link href={"/howwepublish"} className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
                 How we publish
-              </p>
+              </Link>
               <p className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
                 Templates
               </p>
