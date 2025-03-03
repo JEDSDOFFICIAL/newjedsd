@@ -8,6 +8,8 @@ export async function sendSuccessfulUploadPaperEmail(
   author: Author[],
   papername:string,
 ): Promise<ApiResponse> {
+  console.log("author email",author);
+  
   try {
    const authorEmail = author.map((author) => author.emailId).join(", ");
     await resend.emails.send({

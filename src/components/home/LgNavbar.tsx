@@ -56,16 +56,7 @@ function Navbar() {
             >
               Articles
             </div>
-            <div
-              onClick={() => {
-                alert(
-                  "We are currently working on it ... plz check after some time"
-                );
-              }}
-              className={`cursor-pointer ${isChangeBg?' text-black':'text-white'}`}
-            >
-              Community
-            </div>
+           
             <div
               onClick={() => {
                 alert(
@@ -130,9 +121,9 @@ function Navbar() {
           <h1 className="text-xl underline font-bold py-4">Our Policies</h1>
 
           <div className="flex flex-col gap-4 text-base">
-            <p className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
+            {/* <p className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
               Editorial Policies
-            </p>
+            </p> */}
             <p className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
               Submission Guidelines
             </p>

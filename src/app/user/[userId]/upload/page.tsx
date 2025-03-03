@@ -7,6 +7,7 @@ import { z } from "zod";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { toast } from "@/components/ui/use-toast";
+import { Router } from "next/router";
 
 const formSchema = z.object({
   paperName: z
@@ -182,7 +183,9 @@ export default function MultiPageForm() {
         variant: "destructive",
       });
     } finally {
+      
       setLoading(false);
+      
     }
   };
 

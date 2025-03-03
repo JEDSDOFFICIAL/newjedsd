@@ -223,9 +223,7 @@ const AboutNavbar = () => {
           </div>
 
           <div className="flex flex-col gap-4 text-base">
-            <p className=" text-gray-200 hover:text-white text-2xl underline transition-all delay-100 cursor-pointer">
-              Get in Touch
-            </p>
+            
             <div className="flex flex-col gap-2 text-lg">
               
               <p className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">

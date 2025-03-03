@@ -58,6 +58,8 @@ const newkeywords = keywords.split(",").map((keyword: string) => keyword.trim())
       { username: username },
       { $push: { paper: paperId } }
     );
+    console.log("author email");
+    
     const emailsend = await sendSuccessfulUploadPaperEmail(authors,paperName);
     console.log("Email send status:", emailsend); // Log the email send status for
     const reviewermailsend = await sendSuccessfulUploadPaperEmailtoReviwer(PaperPublished, username, "Reviewer Name");
