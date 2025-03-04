@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 function AuthorGuideline() {
   const [isNavButtonClicked, setIsNavButtonClicked] = React.useState(
@@ -272,9 +273,9 @@ function AuthorGuideline() {
                          <li className='text-gray-950/40'>Data Integrity: Authors must ensure that all data presented in the manuscript is accurate and has not been manipulated.</li>
                          <li className='text-gray-950/20'>Raw Data: Authors may be asked to provide raw data for verification purposes.</li>
                        </ul>
-                       <div className='w-full h-fit flex items-center justify-center'>
+                       <Link href={"/howwepublish"} className='w-full h-fit flex items-center justify-center'>
                         <Button variant={"destructive"} size={"lg"} className='mt-4'  onClick={()=>{alert("We are currently working on it ... plz check after some time")}}>Read More</Button>
-                      </div>
+                      </Link>
                      </div>
                     )}
                     {
@@ -297,9 +298,9 @@ function AuthorGuideline() {
                             <ul className="list-disc ml-4 text-gray-800/30">
                               <li>Transparency: Editorial board members must disclose any potential conflicts of interest related to the manuscripts they handle. Board members will be recused from handling manuscripts where a conflict of interest exists.</li>
                             </ul>
-                            <div className='w-full h-fit flex items-center justify-center'>
+                            <Link href={"/publishingmodel"} className='w-full h-fit flex items-center justify-center'>
                         <Button variant={"destructive"} size={"lg"} className='mt-4'  onClick={()=>{alert("We are currently working on it ... plz check after some time")}}>Read More</Button>
-                      </div>
+                      </Link>
                           </div>
                         )
                     }

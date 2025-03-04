@@ -4,6 +4,7 @@ import {TypingAnimation} from "../magicui/typing-animation";
 import { MarqueeDemo } from "./Marquee";
 import { FacebookIcon, Instagram, MailCheckIcon, TwitterIcon,  } from "lucide-react";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 function HomeFirstElement() {
   const {data:session} = useSession();
@@ -23,20 +24,21 @@ function HomeFirstElement() {
         </TypingAnimation>
         
         {
-          session ? <Button
+          session ?<Link href={`/user/${session.user.username}`} >
+ <Button
           variant={"default"}
           size={"lg"}
           className=" shadow-xl text-xl mt-11">
           Dashbord
-          </Button>: <Button
+          </Button>          </Link>: <Link href={"/sign-up"}>
+          <Button
           size={"lg"}
           className="text-xl bg-white text-black hover:bg-gray-200"
-          onClick={() => {
-            alert("We are currently working on it ... plz check after some time");
-          }}
-        >
+          
+          >
           Join with us
         </Button>
+          </Link>
 
         }
        
