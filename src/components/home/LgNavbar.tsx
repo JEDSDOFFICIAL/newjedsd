@@ -35,9 +35,10 @@ function Navbar() {
       <div
         className={`w-full h-fit max-h-[6.5rem] fixed top-0 left-0 z-50 transition-all ${isChangeBg?'bg-white/100 backdrop-blur-sm':'bg-transparent'} duration-300 bg-transparent flex justify-around items-center py-3`}
       >
-        <Link href={'/'} className="logoArea h-[6rem] w-[6rem] bg-[url(/logored.jpg)] bg-cover bg-center">
-        
+        <Link href={"/"} className="w-20 h-20  border border-black ">
+            <img src="/logored.jpg" alt="logo" className="w-full h-full object-fit" />  
         </Link>
+        
         <div className="navArea h-full flex items-center w-[calc(100%-14rem)] justify-between px-8">
           <div className="navArea h-full flex items-center gap-16 text-[1.2rem]">
             <DropdownMenuTrigger asChild>
@@ -57,16 +58,12 @@ function Navbar() {
               Articles
             </div>
            
-            <div
-              onClick={() => {
-                alert(
-                  "We are currently working on it ... plz check after some time"
-                );
-              }}
+            <Link href={session?.user &&`/user/${session?.user?.username}/upload`||""}
+              
               className={`cursor-pointer ${isChangeBg?' text-black':'text-white'}`}
             >
               Publish an Article
-            </div>
+            </Link>
           </div>
 
           <div className="h-full flex items-center gap-16">
@@ -106,7 +103,7 @@ function Navbar() {
 
           <div className="flex flex-col gap-4 text-base">
             <Link href={"/mission"} className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
-              Our Mission and vission
+              Our Mission and Vission
             </Link>
             
             <Link href={"/team"} className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
@@ -142,15 +139,15 @@ function Navbar() {
               Call for Papers
             </Link>
             <Link href={"/howwepublish"} className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
-              How we publish
+              How We Publish
             </Link>
-            <p className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
+            <Link href={"/templates"} className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
               Templates
-            </p>
+            </Link>
            
-            <p className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
+            <Link href={"/peerreview"} className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
               Peer review
-            </p>
+            </Link>
             {/* <p className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
               Research Topics
             </p> */}
@@ -163,9 +160,9 @@ function Navbar() {
             {/* <p className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
               Be a Sponser
             </p> */}
-            <p className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
+            <Link href={"/contactus"} className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
               Contact Us
-            </p>
+            </Link>
            
           </div>
         </div>

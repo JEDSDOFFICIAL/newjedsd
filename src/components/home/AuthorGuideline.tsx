@@ -127,14 +127,16 @@ function AuthorGuideline() {
               </li>
             </ul>
             <div className="w-full h-fit flex justify-center items-center ">
+              <Link href={"/howwepublish"}>
+              
               <Button
                 variant="destructive"
                 size="lg"
                 className="mt-4 border border-black shadow-md"
-                onClick={()=>{alert("We are currently working on it ... plz check after some time")}}
+                
               >
                 Read More
-              </Button>
+              </Button></Link>
             </div>
           </div>
         )}
@@ -178,14 +180,15 @@ function AuthorGuideline() {
               </li>
             </ul>
             <div className="w-full h-fit flex justify-center items-center ">
+              <Link href={"/templates"}>
               <Button
                 variant="destructive"
                 size="lg"
                 className="mt-4 border border-black shadow-md"
-                onClick={()=>{alert("We are currently working on it ... plz check after some time")}}
+                
               >
                 Read More !
-              </Button>
+              </Button></Link>
             </div>
           </div>
         )}
@@ -212,14 +215,15 @@ function AuthorGuideline() {
           
                 
                 <div className="w-full h-fit flex justify-center items-center">
+                  <Link href={"/callforpapers"}>
                     <Button
                         variant="destructive"
                         size="lg"
                         className="mt-4 border border-black shadow-md"
-                        onClick={()=>{alert("We are currently working on it ... plz check after some time")}}
+                        
                     >
                         Read More
-                    </Button>
+                    </Button></Link>
                 </div>
               </div>
             
@@ -247,9 +251,9 @@ function AuthorGuideline() {
                         <li className='text-gray-950/40'>Review Criteria: Reviewers evaluate the manuscript based on originality, technical quality, significance, clarity, and relevance to the journal&apos;s scope.</li>
                         <li className='text-gray-950/20'>Reviewer Reports: Reviewers provide detailed feedback and recommendations: accept, minor revisions, major revisions, or reject.</li>
                       </ul>
-                      <div className='w-full h-fit flex items-center justify-center'>
+                      <Link href={"/peerreview"} className='w-full h-fit flex items-center justify-center'>
                         <Button variant={"destructive"} size={"lg"} className='mt-4' onClick={()=>{alert("We are currently working on it ... plz check after some time")}}>Read More</Button>
-                      </div>
+                      </Link>
                     </div>
                     )}
                     {isNavButtonClicked === "PublicationEthics" && (
@@ -273,37 +277,12 @@ function AuthorGuideline() {
                          <li className='text-gray-950/40'>Data Integrity: Authors must ensure that all data presented in the manuscript is accurate and has not been manipulated.</li>
                          <li className='text-gray-950/20'>Raw Data: Authors may be asked to provide raw data for verification purposes.</li>
                        </ul>
-                       <Link href={"/howwepublish"} className='w-full h-fit flex items-center justify-center'>
+                       <Link href={"/publishingmodel"} className='w-full h-fit flex items-center justify-center'>
                         <Button variant={"destructive"} size={"lg"} className='mt-4'  onClick={()=>{alert("We are currently working on it ... plz check after some time")}}>Read More</Button>
                       </Link>
                      </div>
                     )}
-                    {
-                        isNavButtonClicked === "ConflictofInterest" && (
-                            <div className="p-4">
-                            <h1 className="text-2xl font-bold mb-4">Conflict of Interest</h1>
-                      
-                            <h2 className="text-xl font-bold mb-2">1. Definition:</h2>
-                            <ul className="list-disc ml-4">
-                              <li>Conflict of Interest: A conflict of interest occurs when there are financial, personal, or professional affiliations that could influence the research or interpretation of the results.</li>
-                            </ul>
-                      
-                            <h2 className="text-xl font-bold mb-2">2. Disclosure Requirements:</h2>
-                            <ul className="list-disc ml-4">
-                              <li className='text-gray-800/80'>Authors: All authors must disclose any potential conflicts of interest in the manuscript, including financial support, employment, consultancies, stock ownership, honoraria, and paid expert testimony.</li>
-                              <li className='text-gray-800/70'>Reviewers: Reviewers must disclose any potential conflicts of interest before accepting a review assignment. If a conflict of interest is identified, the reviewer will be recused from the review process.</li>
-                            </ul>
-                      
-                            <h2 className="text-xl font-bold mb-2 text-gray-800/50">3. Editorial Board:</h2>
-                            <ul className="list-disc ml-4 text-gray-800/30">
-                              <li>Transparency: Editorial board members must disclose any potential conflicts of interest related to the manuscripts they handle. Board members will be recused from handling manuscripts where a conflict of interest exists.</li>
-                            </ul>
-                            <Link href={"/publishingmodel"} className='w-full h-fit flex items-center justify-center'>
-                        <Button variant={"destructive"} size={"lg"} className='mt-4'  onClick={()=>{alert("We are currently working on it ... plz check after some time")}}>Read More</Button>
-                      </Link>
-                          </div>
-                        )
-                    }
+                   
       </div>
     </div>
   );

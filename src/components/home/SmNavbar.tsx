@@ -193,9 +193,9 @@ const AboutNavbar = () => {
               <p className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
                 Editorial Policies
               </p>
-              <p className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
+              <Link href={"/howwepublish"} className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
                 Submission Guidelines
-              </p>
+              </Link>
               <p className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
                 Reviewer Guidelines
               </p>
@@ -204,20 +204,20 @@ const AboutNavbar = () => {
         </div>
         <div className="flex flex-col gap-7 text-base">
           <div className="flex flex-col gap-4 text-base">
-            <Link href={"publishingmodel"} className=" text-gray-200 hover:text-white text-2xl underline transition-all delay-100 cursor-pointer">
+            <Link href={"/publishingmodel"} className=" text-gray-200 hover:text-white text-2xl underline transition-all delay-100 cursor-pointer">
               Publishing Model
             </Link>
             <div className="flex flex-col gap-2 text-lg">
               <Link href={"/howwepublish"} className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
                 How we publish
               </Link>
-              <p className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
+              <Link href={"/templates"} className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
                 Templates
-              </p>
+              </Link>
              
-              <p className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
+              <Link href={"/peerreview"} className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
                 Peer review
-              </p>
+              </Link>
             
             </div>
           </div>
@@ -226,9 +226,9 @@ const AboutNavbar = () => {
             
             <div className="flex flex-col gap-2 text-lg">
               
-              <p className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
+              <Link href={"/contactus"} className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
                 Contact Us
-              </p>
+              </Link>
              
             </div>
           </div>

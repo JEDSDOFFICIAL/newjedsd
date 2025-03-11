@@ -19,7 +19,7 @@ function HomeFirstElement() {
           <br />Journal of Embedded and Digital System Design 
           <span className=" text-gray-300">(JEDSD)</span>
         </div>
-        <TypingAnimation className="md:text-xl text-base pl-3 md:pl-0 text-white text-left ">
+        <TypingAnimation className="md:text-xl text-base pl-3 md:pl-0 text-white text-left font-light">
           Explore the cutting-edge research, stay updated with the latest developments, and join our community of innovators and thought leaders in the field of digital and embedded systems.
         </TypingAnimation>
         
@@ -28,8 +28,8 @@ function HomeFirstElement() {
  <Button
           variant={"default"}
           size={"lg"}
-          className=" shadow-xl text-xl mt-11">
-          Dashbord
+          className=" shadow-xl text-xl mt-4">
+          Dashboard
           </Button>          </Link>: <Link href={"/sign-up"}>
           <Button
           size={"lg"}

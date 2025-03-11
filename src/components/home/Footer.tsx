@@ -39,7 +39,7 @@ function Footer() {
                 className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
                 href={"/mission"}
               >
-                Our mission and vision
+                Our Mission and Vission
               </Link>
             </p>
            
@@ -54,12 +54,12 @@ function Footer() {
           <div className="mt-3 grid space-y-3 text-sm">
           
             <p>
-              <a
+              <Link
                 className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
-                href="#"
+                href="/callforpapers"
               >
                 Call for Papers
-              </a>{" "}
+              </Link>{" "}
               
             </p>
            
@@ -73,12 +73,12 @@ function Footer() {
 
           <div className="mt-3 grid space-y-3 text-sm">
             <p>
-              <a
+              <Link
                 className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
-                href="#"
+                href="/publishingmodel"
               >
                 Publishing Model
-              </a>
+              </Link>
             </p>
             <p>
               <a
@@ -114,15 +114,7 @@ function Footer() {
                 Reviewer Policies
               </a>
             </p>
-            <p>
-              <a
-                className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
-                href="#"
-              >
-                Editor Policies
-              </a>{" "}
-             
-            </p>
+            
           </div>
 
          
@@ -154,7 +146,7 @@ function Footer() {
             <div className="mt-3 sm:hidden">
             <a
             className="flex-none font-semibold text-xl text-black focus:outline-none focus:opacity-80"
-            href="#"
+            href="/"
             aria-label="Brand"
           >
             <Image src={'/logored.jpg'} alt="logo" width={40} height={40}/>
