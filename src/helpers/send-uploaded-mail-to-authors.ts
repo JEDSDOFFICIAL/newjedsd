@@ -13,7 +13,7 @@ export async function sendSuccessfulUploadPaperEmail(
   try {
    const authorEmail = author.map((author) => author.emailId).join(", ");
     await resend.emails.send({
-      from: 'host@jedsd.com',
+      from: 'editorial@jedsd.com',
       to: authorEmail,
       subject: 'JEDSD Successful Uploaded Mail',
       react: PaperUploadEmail({ paperName: papername }),

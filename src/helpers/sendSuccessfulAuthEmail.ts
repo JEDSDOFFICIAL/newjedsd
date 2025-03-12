@@ -12,7 +12,7 @@ export async function sendSuccessfulAuthEmail(
     console.log('Username:', username);
     
     await resend.emails.send({
-      from: 'host@jedsd.com',
+      from: 'editorial@jedsd.com',
       to: email,
       subject: 'JEDSD Successful Authentication',
       react: SuccessAuthentication({ username }),

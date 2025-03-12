@@ -218,7 +218,12 @@ const AboutNavbar = () => {
               <Link href={"/peerreview"} className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
                 Peer review
               </Link>
-            
+              <Link href={"/ethicalcons"} className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
+              Ethical Considerations
+            </Link>
+            <Link href={"/conflictofinterest"} className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
+              Conflict of Interest
+            </Link>
             </div>
           </div>
 

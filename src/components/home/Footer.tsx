@@ -62,6 +62,12 @@ function Footer() {
               </Link>{" "}
               
             </p>
+            <Link href={"/ethicalcons"} className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
+              Ethical Considerations
+            </Link>
+            <Link href={"/conflictofinterest"} className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
+              Conflict of Interest
+            </Link>
            
           </div>
         </div>
