@@ -7,13 +7,15 @@ import {
     Row,
     Section,
     Text,
+    Button,
   } from "@react-email/components";
   
   interface PaperUploadEmailProps {
     paperName: string;
+    paperurl: string;
   }
   
-  export default function PaperUploadEmail({  paperName }: PaperUploadEmailProps) {
+  export default function PaperUploadEmail({  paperName,paperurl }: PaperUploadEmailProps) {
     return (
       <Html lang="en" dir="ltr">
         <Head>
@@ -36,6 +38,17 @@ import {
             <Text>
               Congratulations! Your paper titled "{paperName}" has been successfully uploaded to the Journal of Embedded and Digital System Design (JEDSD).
             </Text>
+          </Row>
+          <Row>
+          <Text>
+                <strong>Please download the paper for preview</strong>
+                <Button><a href={paperurl} download>
+                  
+                  
+                  Download
+                  </a>
+                  </Button>
+                </Text>
           </Row>
           <Row>
             <Text>

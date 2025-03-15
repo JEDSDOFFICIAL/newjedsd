@@ -7,6 +7,7 @@ import {
     Row,
     Section,
     Text,
+    Button,
   } from "@react-email/components";
   
   import { Paper } from "@/model/User";
@@ -30,7 +31,7 @@ import {
         <Preview>A new paper "{paperName}" has been submitted for your review.</Preview>
         <Section>
           <Row>
-            <Heading as="h2">Dear {reviewerName},</Heading>
+            <Heading as="h2">Dear Shirshendu sir,</Heading>
           </Row>
           <Row>
             <Text>
@@ -93,7 +94,13 @@ import {
             </Row>
             <Row>
                 <Text>
-                <strong>The Paper Link is :</strong> {paperurl}
+                <strong>Please download the paper for preview</strong>
+                <Button><a href={paperurl} download>
+                  
+                  
+                  Download
+                  </a>
+                  </Button>
                 </Text>
                 </Row>
 

@@ -60,7 +60,7 @@ const newkeywords = keywords.split(",").map((keyword: string) => keyword.trim())
     );
     console.log("author email");
     
-    const emailsend = await sendSuccessfulUploadPaperEmail(authors,paperName);
+    const emailsend = await sendSuccessfulUploadPaperEmail(authors,paperName,fileUrl);
     console.log("Email send status:", emailsend); // Log the email send status for
     const reviewermailsend = await sendSuccessfulUploadPaperEmailtoReviwer(PaperPublished, username, "Reviewer Name");
     console.log("Reviewer Email send status:", reviewermailsend); // Log the reviewer email send status for debugging

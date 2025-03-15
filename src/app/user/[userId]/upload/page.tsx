@@ -123,7 +123,7 @@ export default function MultiPageForm() {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", "uploads_file_jedsd"); // Replace with your preset
-    formData.append("resource_type", "raw");
+    formData.append("resource_type", "auto");
 
     try {
       const res = await axios.post(
