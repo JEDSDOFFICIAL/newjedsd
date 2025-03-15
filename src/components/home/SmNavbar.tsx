@@ -6,6 +6,8 @@ import {
   ChevronRight,
   FacebookIcon,
   Instagram,
+  Linkedin,
+  Mail,
   MailCheckIcon,
   SearchIcon,
   TwitterIcon,
@@ -140,10 +142,12 @@ function SmNavbar() {
             />
             <AboutNavbar />
             <div className="absolute top-2 right-3 flex gap-6 justify-center items-center h-fit w-fit text-white">
-              <MailCheckIcon className="hover:scale-125 transition-all duration-300 cursor-pointer" />
-              <FacebookIcon className="hover:scale-125 transition-all duration-300 cursor-pointer" />
-              <Instagram className="hover:scale-125 transition-all duration-300 cursor-pointer" />
-              <TwitterIcon className="hover:scale-125 transition-all duration-300 cursor-pointer" />
+            <a href="mailto:jedsdofficial@gmail.com">
+        <Mail className="hover:scale-125 transition-all duration-300 cursor-pointer" />
+        </a>
+      <a href="https://www.linkedin.com/company/105599016/admin/dashboard/">
+        <Linkedin className="hover:scale-125 transition-all duration-300 cursor-pointer" />
+        </a>
             </div>
           </div>
         </div>
@@ -190,15 +194,13 @@ const AboutNavbar = () => {
               Policies and Guideline
             </p>
             <div className="flex flex-col gap-2 text-lg">
-              <p className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
-                Editorial Policies
-              </p>
-              <Link href={"/howwepublish"} className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
+            
+              <Link href={"/submissionGuideline"} className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
                 Submission Guidelines
               </Link>
-              <p className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
-                Reviewer Guidelines
-              </p>
+              <Link href={"/authorguideline"} className=" text-gray-200 hover:text-white transition-all delay-100 cursor-pointer">
+                Author Guidelines
+              </Link>
             </div>
           </div>
         </div>

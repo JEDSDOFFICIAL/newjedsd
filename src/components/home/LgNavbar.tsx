@@ -121,12 +121,12 @@ function Navbar() {
             {/* <p className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
               Editorial Policies
             </p> */}
-            <p className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
+            <Link href={"/submissionguideline"} className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
               Submission Guidelines
-            </p>
-            <p className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
-              Reviewer Guidelines
-            </p>
+            </Link>
+            <Link href={"/authorguideline"} className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
+              Author Guidelines
+            </Link>
             
             <Link href={"/ethicalcons"} className=" text-gray-600 hover:text-black transition-all delay-100 cursor-pointer">
               Ethical Considerations

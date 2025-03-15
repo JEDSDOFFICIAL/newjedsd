@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "../ui/button";
 import {TypingAnimation} from "../magicui/typing-animation";
 import { MarqueeDemo } from "./Marquee";
-import { FacebookIcon, Instagram, MailCheckIcon, TwitterIcon,  } from "lucide-react";
+import { FacebookIcon, Instagram, Linkedin, Mail, MailCheckIcon, TwitterIcon,  } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 
@@ -52,10 +52,13 @@ function HomeFirstElement() {
           clipPath: "polygon(0 0, 100% 0%, 100% 100%, 0 100%, 43% 46%)",
         }}
       ><div className="absolute bottom-4 right-3 flex gap-6 justify-center items-center h-fit w-fit lg:text-black text-white">
-      <MailCheckIcon className="hover:scale-125 transition-all duration-300 cursor-pointer" />
-      <FacebookIcon className="hover:scale-125 transition-all duration-300 cursor-pointer" />
-      <Instagram className="hover:scale-125 transition-all duration-300 cursor-pointer" />
-      <TwitterIcon className="hover:scale-125 transition-all duration-300 cursor-pointer" />
+      <a href="mailto:jedsdofficial@gmail.com">
+        <Mail className="hover:scale-125 transition-all duration-300 cursor-pointer" />
+        </a>
+      <a href="https://www.linkedin.com/company/105599016/admin/dashboard/">
+        <Linkedin className="hover:scale-125 transition-all duration-300 cursor-pointer" />
+        </a>
+      
     </div>
          
       </div>
@@ -72,10 +75,12 @@ function HomeFirstElement() {
         }}
       >
         <div className="absolute bottom-4 right-3 flex gap-6 justify-center items-center h-fit w-fit lg:text-black text-white">
-              <MailCheckIcon className="hover:scale-125 transition-all duration-300 cursor-pointer" />
-              <FacebookIcon className="hover:scale-125 transition-all duration-300 cursor-pointer" />
-              <Instagram className="hover:scale-125 transition-all duration-300 cursor-pointer" />
-              <TwitterIcon className="hover:scale-125 transition-all duration-300 cursor-pointer" />
+        <a href="mailto:jedsdofficial@gmail.com">
+        <Mail className="hover:scale-125 transition-all duration-300 cursor-pointer" />
+        </a>
+      <a href="https://www.linkedin.com/company/105599016/admin/dashboard/">
+        <Linkedin className="hover:scale-125 transition-all duration-300 cursor-pointer" />
+        </a>
             </div>
       </div>
       

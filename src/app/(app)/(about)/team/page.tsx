@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 const members = [
   {
     role: "Editor-in-Chief",
-    name: "Dr. Shitshendu Roy",
+    name: "Dr. Shirshendu Roy",
     position: "Assistant Professor, Dayananda Sagar University",
     email: "shirshenduroy-ece@dsu.edu.in",
   },
@@ -35,6 +35,26 @@ const members = [
     name: "Dr. Abhinav Karan",
     position: "Assistant Professor, Dayananda Sagar University",
   },
+  {
+    "role": "Professor",
+    "name": "Dr. Debiprasad Priyabrata Acharya",
+    "position": "Professor, NIT Rourkela"
+  },
+  {
+    "role": "Associate Professor",
+    "name": "Dr. Priyadarsan Parida",
+    "position": "Associate Professor, GIET University"
+  },
+  {
+    "role": "Assistant Professor",
+    "name": "Dr. Shasanka Sekhar Rout",
+    "position": "Assistant Professor, GLA University"
+  },
+  {
+    "role": "Assistant Professor",
+    "name": "Dr. Suraj Prakash Sahoo",
+    "position": "Assistant Professor, VIT Vellore"
+  }
 ];
 
 export default function Members() {
