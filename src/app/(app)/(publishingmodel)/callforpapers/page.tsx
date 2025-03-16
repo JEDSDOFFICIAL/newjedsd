@@ -9,9 +9,9 @@ export default function Publishingmodel() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4 mt-24"
+      className="flex flex-col items-center justify-center  p-4"
     >
-      <Card className="max-w-3xl bg-white shadow-lg rounded-2xl p-6">
+      <Card className=" rounded-2xl bg-white py-4">
         <CardContent>
         <CallForPapers/>
         </CardContent>
@@ -23,8 +23,8 @@ export default function Publishingmodel() {
 
 const CallForPapers = () => {
     return (
-      <div className="p-6 max-w-3xl mx-auto bg-white shadow-md rounded-lg">
-        <h1 className="text-2xl font-bold mb-4">Call For Papers / Scope</h1>
+      <div className="  mx-auto shadow-md rounded-lg">
+        <h1 className="text-2xl font-bold mb-4 w-full text-center">Call For Papers / Scope</h1>
         <p className="mb-4">
           The Journal of Embedded and Digital System Design (JEDSD) expects the submission of research manuscripts related to the development of innovative ideas on embedded and digital system design. The sub-domains can be listed as:
         </p>

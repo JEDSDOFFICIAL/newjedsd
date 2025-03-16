@@ -5,7 +5,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="mt-auto  bg-gray-300 w-screen py-10 px-4 sm:px-6 lg:px-8 mx-auto">
+    <footer className="mt-auto  bg-gray-300 w-screen py-10 px-4 sm:px-6 max-w-[99vw] overflow-hidden">
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 mb-10">
         <div className="col-span-full hidden lg:col-span-1 lg:block">
           <a
@@ -105,21 +105,14 @@ function Footer() {
 
           <div className="mt-3 grid space-y-3 text-sm">
             <p>
-              <a
+              <Link
                 className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
-                href="#"
+                href="/authorguideline"
               >
                 Author Policies
-              </a>
+              </Link>
             </p>
-            <p>
-              <a
-                className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
-                href="#"
-              >
-                Reviewer Policies
-              </a>
-            </p>
+           
             
           </div>
 
@@ -165,7 +158,7 @@ function Footer() {
             <div className="space-x-4">
               <a
                 className="inline-block text-gray-500 hover:text-gray-800 focus:outline-none focus:text-gray-800"
-                href="#"
+                href="mailto:jedsdofficial.com"
               >
                <MailIcon/>
               </a>

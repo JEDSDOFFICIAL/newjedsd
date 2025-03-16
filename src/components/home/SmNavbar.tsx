@@ -125,10 +125,12 @@ function SmNavbar() {
               </ul>
             </nav>
             <div className="absolute bottom-4 right-3 flex gap-6 justify-center items-center h-fit w-fit text-white">
-              <MailCheckIcon className="hover:scale-125 transition-all duration-300 cursor-pointer" />
-              <FacebookIcon className="hover:scale-125 transition-all duration-300 cursor-pointer" />
-              <Instagram className="hover:scale-125 transition-all duration-300 cursor-pointer" />
-              <TwitterIcon className="hover:scale-125 transition-all duration-300 cursor-pointer" />
+            <a href="mailto:jedsdofficial@gmail.com">
+        <Mail className="hover:scale-125 transition-all duration-300 cursor-pointer" />
+        </a>
+      <a href="https://www.linkedin.com/company/105599016/admin/dashboard/">
+        <Linkedin className="hover:scale-125 transition-all duration-300 cursor-pointer" />
+        </a>
             </div>
           </div>
         </div>

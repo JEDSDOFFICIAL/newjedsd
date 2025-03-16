@@ -9,10 +9,9 @@ import {
     Text,
     Button,
   } from "@react-email/components";
-  
   import { Paper } from "@/model/User";
   
-  export default function ReviewerNotificationEmail(username:string,reviewerName:string,{  paperName, authors, keywords,pointofContact,paperurl, abstract,createdAt }: Paper) {
+  export default function ReviewerNotificationEmail(username:string,reviewerName:string,{  paperName, authors, keywords,pointofContact,paperurl, abstract,createdAt,coverletterUrl }: Paper) {
     return (
       <Html lang="en" dir="ltr">
         <Head>
@@ -44,13 +43,32 @@ import {
             </Text>
           </Row>
           <Row>
-            <Text>
-              <strong>The Authors are  :</strong> {authors.map((author) => author.name).join(", ")}
-              and the details of them are 
-                {authors.map((author) => author.affiliation).join(", ")}
-                {authors.map((author) => author.contactNumber).join(", ")}
-                {authors.map((author) => author.emailId).join(", ")}
-            </Text>
+          <table
+        style={{
+          width: "100%",
+          borderCollapse: "collapse",
+          border: "1px solid #ddd",
+        }}
+      >
+        <thead>
+          <tr style={{ backgroundColor: "#f2f2f2", textAlign: "left" }}>
+            <th style={{ padding: "8px", border: "1px solid #ddd" }}>Name</th>
+            <th style={{ padding: "8px", border: "1px solid #ddd" }}>Affiliation</th>
+            <th style={{ padding: "8px", border: "1px solid #ddd" }}>Contact Number</th>
+            <th style={{ padding: "8px", border: "1px solid #ddd" }}>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          {authors.map((author, index) => (
+            <tr key={index} style={{ borderBottom: "1px solid #ddd" }}>
+              <td style={{ padding: "8px", border: "1px solid #ddd" }}>{author.name}</td>
+              <td style={{ padding: "8px", border: "1px solid #ddd" }}>{author.affiliation}</td>
+              <td style={{ padding: "8px", border: "1px solid #ddd" }}>{author.contactNumber}</td>
+              <td style={{ padding: "8px", border: "1px solid #ddd" }}>{author.emailId}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
           </Row>
           <Row>
             <Text>
@@ -93,16 +111,21 @@ import {
                 </Text>
             </Row>
             <Row>
-                <Text>
-                <strong>Please download the paper for preview</strong>
-                <Button><a href={paperurl} download>
-                  
-                  
-                  Download
-                  </a>
-                  </Button>
-                </Text>
-                </Row>
+  <Text>
+    <strong>Please download the paper for preview:</strong>  
+    <a href={paperurl} target="_blank" rel="noopener noreferrer" download>
+      Download Paper
+    </a>
+  </Text>
+</Row>
+<Row>
+  <Text>
+    <strong>Download the cover letter for preview:</strong>  
+    <a href={coverletterUrl || ""} target="_blank" rel="noopener noreferrer">
+      Download Cover Letter
+    </a>
+  </Text>
+</Row>
 
           <Row>
             <Text>

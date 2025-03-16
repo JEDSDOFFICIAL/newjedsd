@@ -2,8 +2,8 @@ import React from 'react';
 
 const AuthorGuidelines = () => {
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-20">
-      <h1 className="text-2xl font-bold mb-4">Author Guidelines</h1>
+    <div className="h-fit my-4 mx-auto p-6 shadow-lg rounded-lg bg-white w-[99%] md:w-[95%]">
+      <h1 className="text-2xl font-bold mb-4 w-full text-center">Author Guidelines</h1>
       <p className="text-gray-700 mb-6">
         The Journal of Embedded and Digital System Design (JEDSD) accepts original manuscripts that satisfy the objective of the journal. Manuscripts should be prepared as per the guidelines mentioned on the website. Manuscripts that have not followed the journal guidelines will face automatic rejection.
       </p>

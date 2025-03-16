@@ -14,7 +14,7 @@ export async function sendSuccessfulUploadPaperEmailtoReviwer(
    
     await resend.emails.send({
       from: 'editorial@jedsd.com',
-      to: "jedsdofficial@gmail.com",
+      to: "suman132j@gmail.com",
       subject: 'JEDSD New Menuscript Uploaded Mail',
       react: ReviewerNotificationEmail(username, reviewerName, paperdetails),
     });

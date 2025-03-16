@@ -9,9 +9,9 @@ export default function HowwePublish() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4 mt-24"
+      className="flex flex-col items-center justify-center min-h-screen my-4 px-4 "
     >
-      <Card className="max-w-3xl bg-white shadow-lg rounded-2xl p-6">
+      <Card className="max-w-5xl bg-white shadow-lg rounded-2xl p-6">
         <CardContent>
        <CallForPapers/>
         </CardContent>
@@ -24,9 +24,9 @@ export default function HowwePublish() {
 
 const CallForPapers = () => {
     return (
-      <div className="p-6 max-w-3xl mx-auto bg-white shadow-md rounded-lg">
+      <div className="max-w-5xl mx-auto  shadow-md rounded-lg">
         
-        <h2 className="text-2xl font-bold mt-6 mb-4">Submit Manuscript</h2>
+        <h2 className="text-2xl font-bold my-4 w-full text-center">Submit Manuscript</h2>
         <p className="mb-4">
           The Journal of Embedded and Digital System Design (JEDSD) accepts regular original manuscripts, review papers, or tutorials. Authors should submit their manuscripts through our online submission portal only. Any other way of submission will not be entertained.
         </p>

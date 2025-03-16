@@ -15,12 +15,12 @@ const EthicalConsiderations = () => {
 
   return (
     <motion.div
-      className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-20"
+      className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-4"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
     >
-      <motion.h1 className="text-2xl font-bold mb-4" variants={itemVariants}>
+      <motion.h1 className="text-2xl font-bold mb-4 w-full text-center" variants={itemVariants}>
         Ethical Considerations
       </motion.h1>
       <motion.p className="text-gray-700 mb-6" variants={itemVariants}>

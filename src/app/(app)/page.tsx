@@ -26,7 +26,7 @@ export default function Home() {
         <Roadmap />
         {/* <Testimonials /> */}
         <UploadProcedure />
-        <Footer />
+ {/* <Footer /> */}
       </div>
       
   );

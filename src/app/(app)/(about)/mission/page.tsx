@@ -10,11 +10,11 @@ export default function MissionVision() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4 mt-20"
+      className="flex flex-col items-center justify-center min-h-screen  px-4 w-full"
     >
-      <Card className="max-w-screen bg-white shadow-lg rounded-2xl p-6">
+      <Card className="max-w-screen bg-white shadow-lg rounded-2xl shadow-neutral-950 py-4 w-full">
         <CardContent>
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-4">
+          <h2 className="text-3xl font-bold text-center text-gray-800 ">
             Our Mission and Vision
           </h2>
           
