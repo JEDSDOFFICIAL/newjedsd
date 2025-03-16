@@ -252,7 +252,7 @@ function AuthorGuideline() {
                         <li className='text-gray-950/20'>Reviewer Reports: Reviewers provide detailed feedback and recommendations: accept, minor revisions, major revisions, or reject.</li>
                       </ul>
                       <Link href={"/peerreview"} className='w-full h-fit flex items-center justify-center'>
-                        <Button variant={"destructive"} size={"lg"} className='mt-4' onClick={()=>{alert("We are currently working on it ... plz check after some time")}}>Read More</Button>
+                        <Button variant={"destructive"} size={"lg"} className='mt-4' >Read More</Button>
                       </Link>
                     </div>
                     )}
@@ -277,8 +277,8 @@ function AuthorGuideline() {
                          <li className='text-gray-950/40'>Data Integrity: Authors must ensure that all data presented in the manuscript is accurate and has not been manipulated.</li>
                          <li className='text-gray-950/20'>Raw Data: Authors may be asked to provide raw data for verification purposes.</li>
                        </ul>
-                       <Link href={"/publishingmodel"} className='w-full h-fit flex items-center justify-center'>
-                        <Button variant={"destructive"} size={"lg"} className='mt-4'  onClick={()=>{alert("We are currently working on it ... plz check after some time")}}>Read More</Button>
+                       <Link href={"/ethicalcons"} className='w-full h-fit flex items-center justify-center'>
+                        <Button variant={"destructive"} size={"lg"} className='mt-4'  >Read More</Button>
                       </Link>
                      </div>
                     )}

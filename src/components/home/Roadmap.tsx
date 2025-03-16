@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "../ui/button";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 function Roadmap() {
   const{data:session} = useSession();
@@ -12,22 +13,15 @@ function Roadmap() {
       >
         <div className="text-black text-3xl sticky top-[6rem] h-fit md:w-1/2 flex flex-col gap-6 px-3 md:px-0">
           <h1 className="text-4xl font-bold ">
-            Discover the Power of Our JEDSD
+            Discover the Power of  JEDSD
           </h1>
           <p className="md:text-lg text-base md:text-left text-justify  ">
-            Welcome to JEDSD, the Journal of Embedded and Digital System Design.
-            We are a pioneering platform dedicated to advancing the fields of
-            embedded systems and digital design. At JEDSD, we aim to bridge the
-            gap between innovation and application by providing insightful
-            research, expert analysis, and cutting-edge solutions. Our mission
-            is to empower professionals, researchers, and enthusiasts with the
-            knowledge and tools they need to thrive in the ever-evolving world
-            of embedded systems and digital design. From exploring the latest
-            trends to sharing industry best practices, JEDSD is your trusted
-            source for all things embedded and digital. Join us as we shape the
-            future of technology, one design at a time.
+          Welcome to the Journal of Embedded and Digital System Design (JEDSD), a pioneering platform dedicated to advancing the fields of embedded and digital system design. At JEDSD, we aim to bridge the gap between innovation and application by providing cutting-edge solutions through insightful research, and expert analysis.. Our mission is to empower professionals, researchers, and enthusiasts with the knowledge they need to thrive in the ever-evolving world of embedded and digital systems. From exploring the latest trends to sharing industry best practices, JEDSD is your trusted source for all things related to digital and embedded systems. Join us to make it a best knowledge sharing platform that can pave the way for revolutionary technologies.
           </p>
+          <Link href="/aboutus">
+          
           <Button className="w-fit">Read Doc</Button>
+          </Link>
         </div>
 
         <div className="h-fit md:w-1/3 w-full flex flex-col gap-20">

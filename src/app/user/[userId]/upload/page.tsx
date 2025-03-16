@@ -1,468 +1,199 @@
 "use client";
 
 import { useState } from "react";
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm, Controller, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { motion } from "framer-motion";
 import { z } from "zod";
+import { storage } from "@/firebaseconfig/firebase"; // Ensure Firebase is initialized
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import axios from "axios";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent } from "@/components/ui/card";
+import { Loader2 } from "lucide-react";
 import { useSession } from "next-auth/react";
-import { toast } from "@/components/ui/use-toast";
-import { Router } from "next/router";
+import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
-  paperName: z
-    .string()
-    .max(50, "Max 50 words allowed")
-    .nonempty("Paper Name is required"),
-  abstract: z
-    .string()
-    .max(300, "Max 300 words allowed")
-    .nonempty("Abstract is required"),
-  keywords: z
-    .string()
-    .nonempty("Keyword is required"),
-  
-  authors: z
-    .array(
-      z.object({
-        name: z.string().min(1, "Name is required"),
-        emailId: z.string().email("Invalid email"),
-        contactNumber: z.string().regex(/^\d{10}$/, "Invalid contact number"),
-        affiliation: z.string().optional(), // Affiliation is optional
-      })
-    )
-    .min(1, "At least one author is required"),
+  paperName: z.string().max(50, "Max 50 words allowed").nonempty("Paper Name is required"),
+  abstract: z.string().max(300, "Max 300 words allowed").nonempty("Abstract is required"),
+  keywords: z.string().nonempty("Keyword is required"),
+  authors: z.array(
+    z.object({
+      name: z.string().min(1, "Name is required"),
+      emailId: z.string().email("Invalid email"),
+      contactNumber: z.string().regex(/^\d{10}$/, "Invalid contact number"),
+      affiliation: z.string().nonempty("Affiliation is required"),
+    })
+  ).min(1, "At least one author is required"),
   pointofContact: z.object({
     name: z.string().min(1, "Name is required"),
     emailId: z.string().email("Invalid email"),
     contactNumber: z.string().regex(/^\d{10}$/, "Invalid contact number"),
-    affiliation: z.string().optional(), // Affiliation is optional
+    affiliation: z.string().nonempty("Affiliation is required"),
   }),
-  fileUrl: z.string().url(),
-  coverletterUrl:z.string().url(),
+  fileUrl: z.string().url().nonempty("Menuscript is required"),
+  coverletterUrl: z.string().url().optional(),
 });
 
-export default function MultiPageForm() {
-  const [step, setStep] = useState(1);
+type FormData = z.infer<typeof formSchema>;
+
+const steps = ["Paper Details", "Authors", "Point of Contact", "Upload File", "Upload Cover Letter", "Review & Submit"];
+
+export default function MultiStepForm() {
+
+  const router = useRouter();
+  const {toast} = useToast();
+  const [step, setStep] = useState(0);
+  const [uploading, setUploading] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { data: session } = useSession();
+  
   const {
     register,
     handleSubmit,
     control,
     setValue,
+    getValues,
     formState: { errors },
-  } = useForm<z.infer<typeof formSchema>>({
+  } = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      paperName: "",
-      abstract: "",
-      keywords: "",
-      authors: [{ name: "", emailId: "", contactNumber: "", affiliation: "" }], // Removed affiliation from default authors
-      pointofContact: {
-        name: "",
-        emailId: "",
-        contactNumber: "",
-        affiliation: "",
-      }, // Removed affiliation from default point of contact
-      fileUrl: "",
-      coverletterUrl:""
+      authors: [{ name: "", emailId: "", contactNumber: "", affiliation: "" }],
     },
   });
 
-  const {
-    fields: authorFields,
-    append: appendAuthor,
-    remove: removeAuthor,
-  } = useFieldArray({
-    name: "authors",
-    control,
-  });
+  const { fields, append, remove } = useFieldArray({ control, name: "authors" });
 
-  const handleMenuscriptFileUpload = async (file: File) => {
+  const handleFileUpload = async (file: File, field: "fileUrl" | "coverletterUrl") => {
     if (!file) return;
+    setUploading(true);
+    const fileRef = ref(storage, `uploads/${file.name}`);
+    const uploadTask = uploadBytesResumable(fileRef, file);
 
-    setLoading(true);
-
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", "uploads_file_jedsd"); // Replace with your preset
-    formData.append("resource_type", "raw");
-
-    try {
-      const res = await axios.post(
-        "https://api.cloudinary.com/v1_1/dvnys2mq6/raw/upload", // Replace with your cloud name
-        formData
-      );
-      setValue("fileUrl", res.data.secure_url);
-      toast({
-        title: "Upload Success",
-        description: "File uploaded successfully!",
-      });
-      console.log("res",res);
-      
-    } catch (error) {
-      console.error("Upload failed", error);
-      toast({
-        title: "Upload Failed",
-        description: "Error uploading file.",
-        variant: "destructive",
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-  const handleCoverletterFileUpload = async (file: File) => {
-    if (!file) return;
-    if (file && file.size > 10 * 1024 * 1024) { // 10MB limit
-      alert("File size exceeds 10MB limit. Please upload a smaller file.");
-      return;
-    }
-    setLoading(true);
-
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", "uploads_file_jedsd"); // Replace with your preset
-    formData.append("resource_type", "auto");
-
-    try {
-      const res = await axios.post(
-        "https://api.cloudinary.com/v1_1/dvnys2mq6/raw/upload", // Replace with your cloud name
-        formData
-      );
-      setValue("coverletterUrl", res.data.secure_url);
-      toast({
-        title: "Upload Success",
-        description: "File uploaded successfully!",
-      });
-      console.log("res",res);
-      
-    } catch (error) {
-      console.error("Upload failed", error);
-      toast({
-        title: "Upload Failed",
-        description: "Error uploading file.",
-        variant: "destructive",
-      });
-    } finally {
-      setLoading(false);
-    }
+    uploadTask.on(
+      "state_changed",
+      null,
+      (error) => {
+        console.error(error);
+        setUploading(false);
+      },
+      async () => {
+        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+        setValue(field, downloadURL, { shouldValidate: true });
+        toast({ title: "File uploaded successfully", variant: "default" });
+        setUploading(false);
+      }
+    );
   };
 
-  const onSubmit = async (data: any) => {
-    if (errors){
-      toast({
-        title:"filled error",
-        description:"Every field is not properly filled"
-      })
-    }
-    if (!session?.user?.username) {
-      toast({
-        title: "Authentication Error",
-        description: "User not authenticated",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setLoading(true);
+  const {data:session} = useSession();
+  const username =session?.user.username ; // Replace with actual userId
+  const onSubmit = async (data: FormData) => {
     try {
-       const res = await axios.post(
-         `/api/uploadPaper/${session.user.username}`,
-         data
-       );
-      console.log("data",data)
-      console.log("res",res) 
-      toast({ title: "Success", description: "Paper submitted successfully!" });
-      setStep(1); // Reset form after successful submission
-    } catch (error) {
-      console.error("Submission failed", error);
-      toast({
-        title: "Submission Failed",
-        description: "Failed to submit paper",
-        variant: "destructive",
-      });
-    } finally {
+      setLoading(true);
+      console.log("submit button click");
       
+
+      console.log("Submitting form", data);
+      console.log("Username", username);
+      
+      
+      const response = await axios.post(`/api/uploadPaper/${username}`, data);
+      console.log("Submission successful", response.data);
+      toast({ title: "Submission successful", variant: "default" });
+      router.push(`/user/${username}`)
+    } catch (error:any) {
+      console.error("Error submitting form", error);
+      toast({ title: "Error submitting form", description: error?.message, variant: "destructive" });
+    }
+    finally{
       setLoading(false);
-      
     }
   };
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-gray-100 rounded-lg shadow-lg">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        {step === 1 && (
-          <div>
-            <h2 className="text-2xl font-semibold mb-4">Manuscript Details</h2>
-            <input
-              type="text"
-              {...register("paperName")}
-              placeholder="Menuscript Title"
-              className="w-full p-2 border rounded-md mb-2"
-            />
-            {errors.paperName && (
-              <p className="text-red-500">{errors.paperName.message}</p>
-            )}
+    <Card className="max-w-full mx-auto h-full p-6 flex justify-center items-center bg-gray-400">
+      <CardContent className="w-full">
+        <motion.div
+          key={step}
+          initial={{ opacity: 0, x: 100 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -100 }}
+          transition={{ duration: 0.5 }}
+        >
+          {step === 0 && (
+            <>
+              <h2 className="text-2xl font-semibold mb-4 text-center">Manuscript Details</h2>
+              <Input {...register("paperName")} placeholder="Paper Name" className="border-black border-2 rounded-sm shadow-md shadow-black"/>
+              <p className="text-red-500 py-4 ">{errors.paperName?.message}</p>
+              <Textarea {...register("abstract")} placeholder="Abstract" className="border-black border-2 rounded-sm shadow-md shadow-black"/>
+              <p className="text-red-500 py-4">{errors.abstract?.message}</p>
+              <Input {...register("keywords")} placeholder="Keywords (comma separated)" className="border-black border-2 rounded-sm shadow-md shadow-black" />
+              <p className="text-red-500 py-4">{errors.keywords?.message}</p>
+            </>
+          )}
 
-            <textarea
-              {...register("abstract")}
-              placeholder="Abstract"
-              className="w-full min-h-24 p-2 border rounded-md mb-2"
-            />
-            {errors.abstract && (
-              <p className="text-red-500">{errors.abstract.message}</p>
-            )}
+          {step === 1 && (
+            <>
+              <h2 className="text-2xl text-center font-semibold mb-4">Authors</h2>
+              {fields.map((field, index) => (
+                <div key={field.id} className="space-y-2 my-4">
+                  <Input {...register(`authors.${index}.name` as const)} placeholder="Name" />
+                  <Input {...register(`authors.${index}.emailId` as const)} placeholder="Email" />
+                  <Input {...register(`authors.${index}.contactNumber` as const)} placeholder="Contact" />
+                  <Input {...register(`authors.${index}.affiliation` as const)} placeholder="Affiliation" />
+                  <Button variant="destructive" onClick={() => remove(index)} className="my-2">Remove</Button>
+                </div>
+              ))}
+              <Button className="my-2" onClick={() => append({ name: "", emailId: "", contactNumber: "", affiliation: "" })}>
+                Add Author
+              </Button>
+            </>
+          )}
 
-            <label htmlFor="keywords">Keywords (max 8, comma-separated):</label>
-            <input
-              type="text"
-              id="keywords"
-              {...register("keywords")}
-              
-                
-              
-              placeholder="Keyword1, Keyword2, ..."
-              className="w-full p-2 border rounded-md mb-2"
-              
-            
-            />
-            {errors.keywords && (
-              <p className="text-red-500">{errors.keywords.message}</p>
-            )}
+          {step === 2 && (
+            <>
+              <h2 className="text-2xl text-center font-semibold mb-4">Point of Contact</h2>
+              <Input {...register("pointofContact.name")} placeholder="Name"                        className="my-3"/>
+              <Input {...register("pointofContact.emailId")} placeholder="Email"                    className="my-3"/>
+              <Input {...register("pointofContact.contactNumber")} placeholder="Contact Number"     className="my-3"/>
+              <Input {...register("pointofContact.affiliation")} placeholder="Affiliation"          className="my-3"/>
+            </>
+          )}
 
-            <button
-              type="button"
-              onClick={() => setStep(2)}
-              className="mt-4 px-4 py-2 bg-blue-600 text-white rounded"
-            >
-              Next
-            </button>
-          </div>
-        )}
-        {step === 2 && (
-          <div>
-            <h2 className="text-2xl font-semibold mb-4">Author Details</h2>
-            {authorFields.map((field, index) => (
-              <div
-                key={field.id}
-                className="mb-4 bg-white p-4 rounded-lg shadow"
-              >
-                <input
-                  {...register(`authors.${index}.name`)}
-                  placeholder="Name"
-                  className="w-full p-2 border rounded-md mb-2"
-                />
-                {errors.authors?.[index]?.name && (
-                  <p className="text-red-500">
-                    {errors.authors[index].name.message}
-                  </p>
-                )}
+          {step === 3 && (
+            <>
+              <h2 className="text-2xl text-center font-semibold mb-4">Upload Manuscript</h2>
+              <Input type="file" onChange={(e) => e.target.files && handleFileUpload(e.target.files[0], "fileUrl")} />
+              {uploading && <Loader2 className="animate-spin" />}
+            </>
+          )}
+          
+          {step === 4 && (
+            <>
+              <h2 className="text-2xl text-center font-semibold mb-4">Upload Cover Letter</h2>
+              <Input type="file" onChange={(e) => e.target.files && handleFileUpload(e.target.files[0], "coverletterUrl")} />
+              {uploading && <Loader2 className="animate-spin" />}
+            </>
+          )}
 
-                <input
-                  {...register(`authors.${index}.emailId`)}
-                  placeholder="Email"
-                  className="w-full p-2 border rounded-md mb-2"
-                />
-                {errors.authors?.[index]?.emailId && (
-                  <p className="text-red-500">
-                    {errors.authors[index].emailId.message}
-                  </p>
-                )}
+          {step === 5 && (
+            <>
+              <h2 className="text-xl font-semibold mb-4">Review & Submit</h2>
+              <pre className="bg-gray-200 p-4 max-w-[90vw] overflow-hidden">{JSON.stringify(getValues(), null, 2)}</pre>
+              <Button onClick={handleSubmit(onSubmit)} className="w-full">{!loading && <>Submit</> }{loading && <>loading</>}</Button>
+            </>
+          )}
+        </motion.div>
 
-                <input
-                  {...register(`authors.${index}.contactNumber`)}
-                  placeholder="Contact Number"
-                  className="w-full p-2 border rounded-md mb-2"
-                />
-                {errors.authors?.[index]?.contactNumber && (
-                  <p className="text-red-500">
-                    {errors.authors[index].contactNumber.message}
-                  </p>
-                )}
-
-                <input
-                  {...register(`authors.${index}.affiliation`)}
-                  placeholder="Affiliation"
-                  className="w-full p-2 border rounded-md"
-                />
-                {errors.authors?.[index]?.affiliation && (
-                  <p className="text-red-500">
-                    {errors.authors[index].affiliation.message}
-                  </p>
-                )}
-
-                <button
-                  type="button"
-                  onClick={() => removeAuthor(index)}
-                  className="mt-2 px-2 py-1 bg-red-600 text-white rounded"
-                >
-                  Remove
-                </button>
-              </div>
-            ))}
-            <button
-              type="button"
-              onClick={() =>
-                appendAuthor({ name: "", emailId: "", contactNumber: "" })
-              }
-              className="mt-2 px-4 py-2 bg-green-600 text-white rounded"
-            >
-              Add Author
-            </button>
-
-            <div className="flex justify-between mt-4">
-              <button
-                type="button"
-                onClick={() => setStep(1)}
-                className="px-4 py-2 bg-gray-600 text-white rounded"
-              >
-                Back
-              </button>
-              <button
-                type="button"
-                onClick={() => setStep(3)}
-                className="px-4 py-2 bg-blue-600 text-white rounded"
-              >
-                Next
-              </button>
-            </div>
-          </div>
-        )}
-        {step === 3 && (
-          <div>
-            <h2 className="text-2xl font-semibold mb-4">Point of Contact</h2>
-            <input
-              {...register("pointofContact.name")}
-              placeholder="Name"
-              className="w-full p-2 border rounded-md mb-2"
-            />
-            {errors.pointofContact?.name && (
-              <p className="text-red-500">
-                {errors.pointofContact.name.message}
-              </p>
-            )}
-
-            <input
-              {...register("pointofContact.emailId")}
-              placeholder="Email"
-              className="w-full p-2 border rounded-md mb-2"
-            />
-            {errors.pointofContact?.emailId && (
-              <p className="text-red-500">
-                {errors.pointofContact.emailId.message}
-              </p>
-            )}
-
-            <input
-              {...register("pointofContact.contactNumber")}
-              placeholder="Contact Number"
-              className="w-full p-2 border rounded-md mb-2"
-            />
-            {errors.pointofContact?.contactNumber && (
-              <p className="text-red-500">
-                {errors.pointofContact.contactNumber.message}
-              </p>
-            )}
-
-            <input
-              {...register("pointofContact.affiliation")}
-              placeholder="Affiliation"
-              className="w-full p-2 border rounded-md"
-            />
-            {errors.pointofContact?.affiliation && (
-              <p className="text-red-500">
-                {errors.pointofContact.affiliation.message}
-              </p>
-            )}
-
-            <div className="flex justify-between mt-4">
-              <button
-                type="button"
-                onClick={() => setStep(2)}
-                className="px-4 py-2 bg-gray-600 text-white rounded"
-              >
-                Back
-              </button>
-              <button
-                type="button"
-                onClick={() => setStep(4)}
-                className="px-4 py-2 bg-blue-600 text-white rounded"
-              >
-                Next
-              </button>
-            </div>
-          </div>
-        )}
-        {step === 4 && (
-          <div>
-            <h2 className="text-2xl font-semibold mb-4">Upload Manuscript</h2>
-            <input
-              type="file"
-              onChange={(e) => {
-                if (e.target.files && e.target.files[0]) {
-                  handleMenuscriptFileUpload(e.target.files[0]);
-                }
-              }}
-              className="w-full p-2 border rounded-md mb-2"
-            />
-            {loading && <p>Uploading...</p>}
-            {errors.fileUrl && (
-              <p className="text-red-500">{errors.fileUrl.message}</p>
-            )}
-            <div className="flex justify-between mt-4">
-              <button
-                type="button"
-                onClick={() => setStep(3)}
-                className="px-4 py-2 bg-gray-600 text-white rounded"
-              >
-                Back
-              </button>
-              <button
-                type="button"
-                onClick={() => setStep(5)}
-                className="px-4 py-2 bg-green-600 text-white rounded"
-              >
-                Next
-              </button>
-            </div>
-          </div>
-        )}{" "}
-        {step === 5 && (
-          <div>
-            <h2 className="text-2xl font-semibold mb-4">Upload Cover letter</h2>
-            <input
-              type="file"
-              onChange={(e) => {
-                if (e.target.files && e.target.files[0]) {
-                  handleCoverletterFileUpload(e.target.files[0]);
-                }
-              }}
-              className="w-full p-2 border rounded-md mb-2"
-            />
-            {loading && <p>Uploading...</p>}
-            {errors.fileUrl && (
-              <p className="text-red-500">{errors.fileUrl.message}</p>
-            )}
-            <div className="flex justify-between mt-4">
-              <button
-                type="button"
-                onClick={() => setStep(4)}
-                className="px-4 py-2 bg-gray-600 text-white rounded"
-              >
-                Back
-              </button>
-              <button
-                type="submit"
-                className="px-4 py-2 bg-green-600 text-white rounded disabled:opacity-50 disabled:bg-gray-400"
-                disabled={Object.keys(errors).length > 0}
-              >
-                Submit
-              </button>
-            </div>
-          </div>
-        )}{" "}
-      </form>
-    </div>
+        <div className="flex justify-between mt-4">
+          <Button disabled={step === 0} onClick={() => setStep((prev) => prev - 1)}>Back</Button>
+           <Button disabled={step === steps.length - 1} onClick={() => setStep((prev) => prev + 1)}>Next</Button> 
+        </div>
+      </CardContent>
+    </Card>
   );
 }
