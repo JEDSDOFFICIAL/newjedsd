@@ -24,7 +24,7 @@ export default function HowwePublish() {
 
 const CallForPapers = () => {
     return (
-      <div className="max-w-5xl mx-auto  shadow-md rounded-lg">
+      <div className="w-[99%] md:w-[80%] mx-auto  shadow-md rounded-lg">
         
         <h2 className="text-2xl font-bold my-4 w-full text-center">Submit Manuscript</h2>
         <p className="mb-4">

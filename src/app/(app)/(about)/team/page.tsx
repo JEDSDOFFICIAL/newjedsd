@@ -63,12 +63,12 @@ export default function Members() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="flex flex-col items-center justify-center min-h-screen bg-gray-100 rounded-sm shadow-md shadow-black w-[95vw]"
+      className="flex flex-col items-center justify-center min-h-screen bg-gray-100 rounded-sm shadow-md shadow-black w-[99%] md:w-[80%]"
     >
       <h2 className="text-3xl font-bold text-center text-black mb-6">Members</h2>
       <div className="flex flex-wrap justify-center gap-4">
         {members.map((member, index) => (
-          <Card key={index} className="bg-white shadow-lg rounded-2xl p-4 md:w-auto w-full mx-4">
+          <Card key={index} className="bg-white shadow-lg rounded-2xl p-4  w-[20rem] max-w-[98vw] mx-4">
             <CardContent>
               <h3 className="text-xl font-semibold text-gray-700">{member.name}</h3>
               <p className="text-gray-600">{member.role}</p>
