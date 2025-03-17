@@ -9,7 +9,7 @@ export default function HowwePublish() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="flex flex-col items-center justify-center min-h-screen my-4 px-4 "
+      className="flex flex-col items-center justify-center min-h-screen my-4 px-4 w-[99%] md:w-[80%] "
     >
       <Card className="max-w-5xl bg-white shadow-lg rounded-2xl p-6">
         <CardContent>

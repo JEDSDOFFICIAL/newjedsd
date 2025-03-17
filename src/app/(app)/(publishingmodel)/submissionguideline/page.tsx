@@ -15,7 +15,7 @@ export default function SubmissionGuidelines() {
 
   return (
     <motion.div
-      className="max-w-5xl mx-auto p-6 bg-white shadow-lg rounded-lg my-4"
+      className="w-[99%] md:w-[80%] mx-auto p-6 bg-white shadow-lg rounded-lg my-4"
       initial="hidden"
       animate="visible"
       variants={containerVariants}

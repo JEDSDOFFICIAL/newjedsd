@@ -17,12 +17,12 @@ export default function  ConflictOfInterest  () {
   
     return (
       <motion.div
-        className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-20"
+        className="mx-auto p-6 bg-white shadow-lg rounded-lg mt-4 w-[99%] md:w-[80%]"
         initial="hidden"
         animate="visible"
         variants={containerVariants}
       >
-        <motion.h1 className="text-2xl font-bold mb-4" variants={itemVariants}>
+        <motion.h1 className="text-2xl font-bold mb-4 text-center" variants={itemVariants}>
           Conflict of Interest
         </motion.h1>
         <motion.p className="text-gray-700 mb-6" variants={itemVariants}>

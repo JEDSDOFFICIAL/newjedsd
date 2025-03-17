@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { motion } from 'framer-motion';
 
 function AuthorGuideline() {
   const [isNavButtonClicked, setIsNavButtonClicked] = React.useState(
@@ -9,6 +10,12 @@ function AuthorGuideline() {
   const ClickedEvent = (e: string) => {
     setIsNavButtonClicked(e);
    
+  };
+  
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
   return (
@@ -66,79 +73,44 @@ function AuthorGuideline() {
 
       <div className="textArea w-full">
         {isNavButtonClicked === "SubmissionGuideline" && (
-          <div className="p-4">
-            <h1 className="text-2xl font-bold mb-4">Manuscript Preparation</h1>
-            <ul className="list-disc ml-4">
-              <li>
-                <span className="font-bold">Title:</span> Concise and
-                informative. Avoid abbreviations and formulae.
-              </li>
-              <li>
-                <span className="font-bold">Abstract:</span> Maximum 250 words,
-                summarizing the research question, methodology, results, and
-                conclusion.
-              </li>
-              <li>
-                <span className="font-bold">Keywords:</span> 3-5 keywords to
-                facilitate indexing and search.
-              </li>
-              <li>
-                <span className="font-bold">Main Text:</span> Structured as
-                Introduction, Methods, Results, Discussion, and Conclusion.
-                <ul className="list-disc ml-4">
-                  <li>
-                    <span className="font-bold">Introduction:</span> Context,
-                    objectives, and the significance of the study.
-                  </li>
-                  <li>
-                    <span className="font-bold">Methods:</span> Detailed
-                    methodology, including materials, procedures, and analysis
-                    techniques.
-                  </li>
-                  <li>
-                    <span className="font-bold">Results:</span> Clear and
-                    concise presentation of findings with appropriate use of
-                    tables and figures.
-                  </li>
-                  <li  className="text-gray-600/90">
-                    <span className="font-bold">Discussion:</span>{" "}
-                    Interpretation of results, implications, limitations, and
-                    future directions.
-                  </li>
-                  <li className="text-gray-600/70">
-                    <span className="font-bold">Conclusion:</span> Summary of
-                    findings and their significance.
-                  </li>
-                </ul>
-              </li>
-              <li className="text-gray-600/50">
-                <span className="font-bold">References:</span> Follow IEEE
-                citation style.
-              </li>
-              <li className="text-gray-600/30">
-                <span className="font-bold">Figures and Tables:</span>{" "}
-                High-quality images with descriptive captions. Tables should be
-                editable.
-              </li>
-              <li className="text-gray-600/10">
-                <span className="font-bold">Supplementary Material:</span>{" "}
-                Optional; include additional data or material that supports the
-                manuscript.
-              </li>
-            </ul>
-            <div className="w-full h-fit flex justify-center items-center ">
-              <Link href={"/howwepublish"}>
-              
+          <div className="p-6">
+          
+          <motion.h1 className="text-2xl font-bold mb-4 text-center" variants={itemVariants}>
+          Submission Guidelines
+        </motion.h1>
+        <motion.p className="text-gray-700 mb-6" variants={itemVariants}>
+          The Journal of Embedded and Digital System Design (JEDSD) accepts regular original manuscripts, review papers, and tutorials. Authors must submit their manuscripts through our online submission portal.
+        </motion.p>
+  
+        <motion.div variants={itemVariants}>
+          <h2 className="text-xl font-semibold mt-4">1. Online Submission Portal</h2>
+          <ul className="list-disc pl-5 text-gray-700">
+            <li>Access Link: <a href="#" className="text-blue-600 underline">Submit Manuscript</a></li>
+            <li>User Registration: New users must register for an account.</li>
+            <li>Existing users can log in with their credentials.</li>
+          </ul>
+        </motion.div>
+  
+        <motion.div variants={itemVariants}>
+          <h2 className="text-xl font-semibold mt-4">2. Submission Process</h2>
+          <ul className="list-disc pl-5 text-gray-700">
+            <li>Complete the submission form with manuscript details (title, abstract, keywords, authors).</li>
+            <li>Choose a corresponding author for communication.</li>
+            <li>Upload the manuscript file in <strong>PDF format</strong>.</li>
+            <li>Attach a cover letter with the necessary details.</li>
+          </ul>
+        </motion.div>
+
+        <Link href={"/submissionguideline"} className="w-full h-fit flex justify-center items-center">
               <Button
                 variant="destructive"
                 size="lg"
                 className="mt-4 border border-black shadow-md"
                 
               >
-                Read More
+                Read More !
               </Button></Link>
-            </div>
-          </div>
+        </div>
         )}
         {isNavButtonClicked === "Templates" && (
           <div className="p-4">

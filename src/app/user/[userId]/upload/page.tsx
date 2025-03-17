@@ -5,7 +5,7 @@ import { useForm, Controller, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import { z } from "zod";
-import { storage } from "@/firebaseconfig/firebase"; // Ensure Firebase is initialized
+import { storage } from "@/context/firebaseconfig/firebase"; // Ensure Firebase is initialized
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import axios from "axios";
 import { Button } from "@/components/ui/button";

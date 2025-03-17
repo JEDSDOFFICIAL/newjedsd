@@ -15,7 +15,7 @@ const EthicalConsiderations = () => {
 
   return (
     <motion.div
-      className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-4"
+      className=" mx-auto p-6 bg-white shadow-lg rounded-lg mt-4 w-[99%] md:w-[80%]"
       initial="hidden"
       animate="visible"
       variants={containerVariants}

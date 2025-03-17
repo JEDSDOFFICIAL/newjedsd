@@ -9,7 +9,7 @@ export default function Publishingmodel() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="flex flex-col items-center justify-center  p-4"
+      className="flex flex-col items-center justify-center mt-4 w-[99%] md:w-[80%]"
     >
       <Card className=" rounded-2xl bg-white py-4">
         <CardContent>
