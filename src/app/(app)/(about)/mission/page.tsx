@@ -10,7 +10,7 @@ export default function MissionVision() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="flex flex-col items-center justify-center min-h-screen  px-4 w-full"
+      className="flex flex-col items-center justify-center min-h-screen  px-4  w-[99%] md:w-[80%]"
     >
       <Card className="max-w-screen bg-white shadow-lg rounded-2xl shadow-neutral-950 py-4 w-full">
         <CardContent>

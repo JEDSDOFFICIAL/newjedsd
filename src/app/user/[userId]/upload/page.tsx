@@ -183,7 +183,52 @@ export default function MultiStepForm() {
           {step === 5 && (
             <>
               <h2 className="text-xl font-semibold mb-4">Review & Submit</h2>
-              <pre className="bg-gray-200 p-4 max-w-[90vw] overflow-hidden">{JSON.stringify(getValues(), null, 2)}</pre>
+              
+      <table className="w-full border-collapse border border-gray-300">
+        <tbody>
+          {Object.entries(getValues()).map(([key, value]) => (
+            <tr key={key} className="border-b border-gray-300">
+              <td className="p-2 font-semibold capitalize bg-gray-100">{key.replace(/([A-Z])/g, ' $1')}</td>
+              <td className="p-2">
+                {Array.isArray(value) ? (
+                  <table className="w-full border border-gray-300">
+                    <thead>
+                      <tr>
+                        {Object.keys(value[0] || {}).map((subKey) => (
+                          <th key={subKey} className="border p-2 bg-gray-200 capitalize">{subKey}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {value.map((item, index) => (
+                        <tr key={index} className="border-b">
+                          {Object.values(item).map((val, i) => (
+                            <td key={i} className="p-2 border">{val || '-'}</td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                ) : typeof value === 'object' ? (
+                  <table className="w-full border border-gray-300">
+                    <tbody>
+                      {Object.entries(value).map(([subKey, subValue]) => (
+                        <tr key={subKey} className="border-b">
+                          <td className="p-2 font-semibold bg-gray-100 capitalize">{subKey}</td>
+                          <td className="p-2">{subValue || '-'}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                ) : (
+                  <span>{value || '-'}</span>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+              
               <Button onClick={handleSubmit(onSubmit)} className="w-full">{!loading && <>Submit</> }{loading && <>loading</>}</Button>
             </>
           )}

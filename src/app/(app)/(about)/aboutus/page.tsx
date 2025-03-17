@@ -9,7 +9,7 @@ export default function AboutUs() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="flex flex-col items-center justify-center p-6 "
+      className="flex flex-col items-center justify-center p-6 w-[99%] md:w-[80%] "
     >
       <Card className=" bg-white shadow-lg rounded-2xl p-6">
         <CardContent>

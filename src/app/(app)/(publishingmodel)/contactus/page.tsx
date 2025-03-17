@@ -15,12 +15,12 @@ const ContactUs = () => {
 
   return (
     <motion.div
-      className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg"
+      className="w-[99%] md:w-[80%] mt-4  mx-auto p-6 bg-white shadow-lg rounded-lg"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
     >
-      <motion.h1 className="text-2xl font-bold mb-4" variants={itemVariants}>
+      <motion.h1 className="text-2xl font-bold mb-4 text-center" variants={itemVariants}>
         Contact Us
       </motion.h1>
       
