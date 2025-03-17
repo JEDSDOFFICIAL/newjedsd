@@ -7,11 +7,17 @@ export async function sendSuccessfulUploadPaperEmail(
   author: Author[],
   papername: string,
   paperurl: string,
+  pointofContact:Author[]
 
 ): Promise<ApiResponse> {
   try {
     const authorEmails = author.map((author) => author.emailId); // Convert to array
+const pocemail  = pointofContact.map((author) => author.emailId); // Convert to array
 
+const poceemail1 = pocemail.pop();
+if (poceemail1) {
+  authorEmails.push(poceemail1);
+}
     console.log("Sending email to:", authorEmails);
 
     await resend.emails.send({
